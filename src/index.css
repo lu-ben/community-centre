@@ -6,10 +6,10 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  color: #343B53;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-image: linear-gradient(to right, rgba(58, 71, 120, 0.9), rgba(77,161, 116, 0.9)), url('assets/background.jpg');
+  background-size: cover;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
