@@ -14,6 +14,7 @@ export type CardProps = {
 
 export const paths = {
   login: '/',
+  signup: '/signup',
   dashboard: '/dashboard',
   registration: '/registration',
   rental: '/rental',

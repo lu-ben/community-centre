@@ -4,10 +4,11 @@ type TextProps = {
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   height?: string
+  width?: string
 }
 
-export const InputText = ({label, value, onChange, height = ""}: TextProps) => (
-  <div className="pb-3 w-full">
+export const InputText = ({label, value, onChange, height = "", width = 'w-full'}: TextProps) => (
+  <div className={`pb-3 ${width}`}>
     <div className="text-left mb-2">{label}</div>
     <input
       className={`bg-light-blue rounded-2xl px-4 py-1 w-full border-none outline-none focus:outline-none ${height}`}
