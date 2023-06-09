@@ -7,7 +7,7 @@ type ButtonProps = {
 }
 
 
-export const Button = ({ name, selected = false, path = '/' }:ButtonProps) => {
+export const HeaderButton = ({ name, selected = false, path = '/' }:ButtonProps) => {
   const navigate = useNavigate();
   return (
     selected 

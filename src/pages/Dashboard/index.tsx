@@ -11,7 +11,7 @@ export const Dashboard = () => {
   const [eventData, setEventData] = useState<CardProps[]>(fakeEventData);
 
   useEffect(() => {
-    setTimeout(()=> setLoading(false), 3000)
+    setTimeout(()=> setLoading(false), 500)
   }, [])
 
   return (
@@ -20,22 +20,36 @@ export const Dashboard = () => {
         <div className="col-span-3 min-h-screen">
           <div className="mb-8 min-h-announcement">
             <h2 className="text-left text-4xl font-bold mb-6">Latest Announcement</h2>
-            {loading ?
-              <BarLoader loading color='#343B53'/> :
-              <Card title={announcementData.title} date={announcementData.date} subtitle={announcementData.subtitle} content={announcementData.content} />
+            {loading 
+              ? <BarLoader loading color='#343B53'/> 
+              : <Card 
+                title={announcementData.title} 
+                tags={announcementData.tags} 
+                date={announcementData.date} 
+                subtitle={announcementData.subtitle} 
+                content={announcementData.content} 
+              />
             }
           </div>
           <h2 className="text-left text-4xl font-bold mb-6">Virtual Bulletin Board</h2>
-          {loading ?
-            <BarLoader loading color='#343B53'/> :
-            bulletinData.map((item: CardProps) => (<Card title={item.title} subtitle={item.subtitle} date={item.date} content={item.content} />))
+          {loading 
+            ? <BarLoader loading color='#343B53'/> 
+            : bulletinData.map((item: CardProps, index: number) => (
+              <Card 
+                title={item.title} 
+                subtitle={item.subtitle} 
+                date={item.date} 
+                content={item.content} 
+                key={index}
+              />
+            ))
           }
         </div>
         <div className="col-span-2 min-h-screen">
           <h2 className="text-left text-4xl font-bold mb-6">Upcoming Events</h2>
           {loading ?
             <BarLoader loading color='#343B53'/> :
-            eventData.map((item: CardProps) => <Card title={item.title} date={item.date} subtitle={item.subtitle} />)
+            eventData.map((item: CardProps, index: number) => <Card title={item.title} date={item.date} subtitle={item.subtitle} key={index}/>)
           }
         </div>
       </div>
