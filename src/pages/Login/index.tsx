@@ -2,9 +2,12 @@ import React from "react";
 import { InputText } from "../../components/InputText";
 import { Button } from "../../components/Button";
 import { useUser } from "../../hooks/useUser";
+import { useNavigate } from "react-router-dom";
+import { paths } from "../../utils/enum";
 
 export const Login = () => {
   const hook = useUser();
+  const navigate = useNavigate();
 
   return (
     <div className="w-full grid">
@@ -15,7 +18,7 @@ export const Login = () => {
         <InputText label ='Pin' />
         <div className="mt-8 grid grid-cols-2 h-14">
           <Button name="Login" color="bg-light-blue" onClick={hook.hookHandleLogin}/>
-          <Button name="Sign-up" color="bg-white" />
+          <Button name="Sign-up" color="bg-white" onClick={() => navigate(paths.signup)} />
         </div>
       </div>
     </div>
