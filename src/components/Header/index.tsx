@@ -1,16 +1,13 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { paths } from '../../utils/enum';
 import { HeaderButton } from './headerButton';
-import { Button } from '../Button';
 import { useUser } from '../../hooks/useUser';
 
 export const Header = () => {
   const userHook = useUser();
   const location = useLocation();
   const pathname = location.pathname;
-
-  console.log(userHook.hookUserCookie.user)
 
   return (
     <div className='mb-4 mt-12'>
@@ -24,7 +21,7 @@ export const Header = () => {
         <HeaderButton name="Announcements" selected={pathname === paths.announcement} path={paths.announcement}></HeaderButton>
         <HeaderButton name="Virtual Bulletin" selected={pathname === paths.bulletin} path={paths.bulletin}></HeaderButton>
         <HeaderButton name="Equipment Rental" selected={pathname === paths.rental} path={paths.rental}></HeaderButton>
-        {/* <HeaderButton name="Logout" selected={pathname === paths.logout} path={paths.logout}></HeaderButton> */}
+        <HeaderButton name="Event History" selected={pathname === paths.history} path={paths.rental}></HeaderButton>
       </div>
     </div>
   )

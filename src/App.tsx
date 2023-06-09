@@ -8,7 +8,8 @@ import { Dashboard } from './pages/Dashboard'
 import { Registration } from './pages/Registration'
 import { EquipmentRental } from './pages/EquipmentRental'
 import { paths } from './utils/enum'
-// import postgres from 'postgres'
+import { Announcement } from './pages/Announcement'
+import { VirtualBulletin } from './pages/VirtualBulletin'
 
 
 function App() {
@@ -20,7 +21,9 @@ function App() {
         <Route path={paths.login} element={<Login />} />
         <Route path={paths.dashboard} element={<Dashboard />} />
         <Route path={paths.registration} element={<Registration />} />
-        <Route path={paths.registration} element={<EquipmentRental />} />
+        <Route path={paths.rental} element={<EquipmentRental />} />
+        <Route path={paths.announcement} element={<Announcement />} />
+        <Route path={paths.bulletin} element={<VirtualBulletin />} />
       </Routes>
     </div>
   )

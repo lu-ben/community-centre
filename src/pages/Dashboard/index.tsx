@@ -8,7 +8,7 @@ export const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [announcementData, setAnnouncementData] = useState<CardProps>(fakeAnnouncementData);
   const [bulletinData, setBulletinData] = useState<CardProps[]>(fakeBulletinPostData);
-  const [eventData, setEventData] = useState<CardProps[]>(fakeEventData);
+  const [eventData, setEventData] = useState<CardProps[]>(fakeEventData);  
 
   useEffect(() => {
     setTimeout(()=> setLoading(false), 500)
