@@ -14,13 +14,39 @@ export const Card = ({
   ageRange,
   eventType,
   tags,
+  bulletin = false,
 }: CardProps) => 
   tall 
     ? (
       <div className='bg-light-blue rounded-xl px-6 py-4 min-w-card max-h-card w-full mb-4'>
-        <h3 className='text-2xl text-left font-bold'>{title}</h3>
-        <p className='text-xs text-left italic'>{subtitle}</p>
-        <p className='text-xs text-left font-semibold'>{date}</p>
+
+        {bulletin ? (
+          <div className='flex'>
+            <div className='grow'>
+              <h3 className='text-2xl text-left font-bold'>{title}</h3>
+              <p className='text-xs text-left italic'>{subtitle}</p>
+              <p className='text-xs text-left font-semibold'>{date}</p>
+            </div>
+            <div className='grow-0'>
+              <Button 
+                name={
+                  buttonDisabled 
+                    ? cardButtonTypes[typeIndex].disabled 
+                    : cardButtonTypes[typeIndex].enabled} 
+                disabled={buttonDisabled}
+              />
+            </div>
+          </div>
+        ) 
+          :
+          (
+            <>
+              <h3 className='text-2xl text-left font-bold'>{title}</h3>
+              <p className='text-xs text-left italic'>{subtitle}</p>
+              <p className='text-xs text-left font-semibold'>{date}</p>
+            </>
+          )
+        }
         { <div className="flex gap-1 mt-2">{tags && tags.map((item: string, index: number) => <Tag label={item} key={index}/>)}</div>}
         { content && <p className="pt-6 pb-2 text-xs text-left">{content}</p> }
       </div>

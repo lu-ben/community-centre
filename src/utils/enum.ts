@@ -9,6 +9,7 @@ export type CardProps = {
   ageRange?: string;
   eventType?: string;
   tags?: string[];
+  bulletin?: boolean;
 }
 
 export const paths = {
@@ -19,10 +20,12 @@ export const paths = {
   bulletin: '/bulletin',
   announcement: '/announcement',
   logout: '/logout',
+  history: '/history',
 }
 
 // typeIndex === 0 is for events
 // typeIndex === 1 is for equipments
+// typeIndex === 2 is for bulletin posts
 export const cardButtonTypes = [
   {
     enabled: 'Register',
@@ -31,6 +34,10 @@ export const cardButtonTypes = [
   {
     enabled: 'Reserve',
     disabled: 'Reserved',
+  },
+  {
+    enabled: 'Approve',
+    disabled: 'Approved',
   }
 ]
 
@@ -38,3 +45,21 @@ export const USERTYPES = {
   EMPLOYEE: 'employee',
   CLIENT: 'client',
 }
+
+export const ModalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    background: 'white',
+    width: '600px',
+    border: 'none',
+    borderRadius: '1.25rem',
+  },
+  overlay: {
+    backgroundColor: 'rgba(70, 70, 70, 0.50)',
+  },
+};

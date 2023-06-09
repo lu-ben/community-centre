@@ -17,7 +17,6 @@ export const Registration = () => {
     setTimeout(()=> setLoading(false), 1000)
   }, [])
 
-  // TODO: hide the add events button for clients
   return (
     <>
       <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl grid grid-cols-6 gap-10 px-12 py-10 mb-12">
@@ -32,12 +31,12 @@ export const Registration = () => {
         </div>
         <div className="col-span-4 min-h-screen">
           {userHook.hookUserCookie.user?.userType === USERTYPES.EMPLOYEE &&
-          <div className="my-4 flex">
-            <Button name="Add Events +" color="bg-light-blue"/>
-          </div>
+            <div className="my-4 flex">
+              <Button name="Add Events +" color="bg-light-blue"/>
+            </div>
           }
           {loading ?
-            <BarLoader className="mx-auto" loading color='#343B53'/> :
+            <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
             eventData.map((item: CardProps) => 
               <Card 
                 title={item.title} 
