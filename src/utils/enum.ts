@@ -3,8 +3,12 @@ export type CardProps = {
   date: string;
   subtitle: string;
   content?: string;
-  width?: number;
-  height?: number;
+  tall?: boolean;
+  buttonDisabled?: boolean;
+  typeIndex?: number;
+  ageRange?: string;
+  eventType?: string;
+  tags?: string[];
 }
 
 export const paths = {
@@ -15,4 +19,22 @@ export const paths = {
   bulletin: '/bulletin',
   announcement: '/announcement',
   logout: '/logout',
+}
+
+// typeIndex === 0 is for events
+// typeIndex === 1 is for equipments
+export const cardButtonTypes = [
+  {
+    enabled: 'Register',
+    disabled: 'Full'
+  },
+  {
+    enabled: 'Reserve',
+    disabled: 'Reserved',
+  }
+]
+
+export const USERTYPES = {
+  EMPLOYEE: 'employee',
+  CLIENT: 'client',
 }

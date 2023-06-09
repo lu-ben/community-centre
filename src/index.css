@@ -9,6 +9,7 @@
   color: #343B53;
 
   background-image: linear-gradient(to right, rgba(58, 71, 120, 0.9), rgba(77,161, 116, 0.9)), url('assets/background.jpg');
+  background-attachment: fixed;
   background-size: cover;
 
   font-synthesis: none;

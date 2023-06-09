@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontSize: {
+        'xxs': '0.625rem',
+      },
       minWidth: {
         'screen-md-2': '980px',
         'card': '200px',
@@ -26,6 +29,7 @@ export default {
         'turqoise': '#B9FFE4',
         'turqoise-inactive': '#97CEB8',
         'light-blue': '#E0E3EF',
+        'medium-blue': '#5A617C',
         'dark-blue': '#343B53',
       }
     },

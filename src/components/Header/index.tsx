@@ -1,22 +1,30 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Button } from './button';
 import { paths } from '../../utils/enum';
+import { HeaderButton } from './headerButton';
+import { Button } from '../Button';
+import { useUser } from '../../hooks/useUser';
 
 export const Header = () => {
+  const userHook = useUser();
   const location = useLocation();
   const pathname = location.pathname;
 
+  console.log(userHook.hookUserCookie.user)
+
   return (
     <div className='mb-4 mt-12'>
-      <h1 className='text-white text-left my-2'>Welcome Back, User!</h1>
+      <div className="flex space-between">
+        <h1 className='text-white text-left my-2 grow'>Welcome Back, User!</h1>
+        <button className='bg-transparent	text-white bottom-0 my-4 pr-0 border-none outline-none focus:outline-none' onClick={userHook.hookHandleLogout}>Logout</button>
+      </div>
       <div className='flex gap-2 max-w-screen-md-2'>
-        <Button name="Dashboard" selected={pathname === paths.dashboard} path={paths.dashboard}></Button>
-        <Button name="Registration" selected={pathname === paths.registration} path={paths.registration}></Button>
-        <Button name="Announcements" selected={pathname === paths.announcement} path={paths.announcement}></Button>
-        <Button name="Virtual Bulletin" selected={pathname === paths.bulletin} path={paths.bulletin}></Button>
-        <Button name="Equipment Rental" selected={pathname === paths.rental} path={paths.rental}></Button>
-        <Button name="Logout" selected={pathname === paths.logout} path={paths.logout}></Button>
+        <HeaderButton name="Dashboard" selected={pathname === paths.dashboard} path={paths.dashboard}></HeaderButton>
+        <HeaderButton name="Registration" selected={pathname === paths.registration} path={paths.registration}></HeaderButton>
+        <HeaderButton name="Announcements" selected={pathname === paths.announcement} path={paths.announcement}></HeaderButton>
+        <HeaderButton name="Virtual Bulletin" selected={pathname === paths.bulletin} path={paths.bulletin}></HeaderButton>
+        <HeaderButton name="Equipment Rental" selected={pathname === paths.rental} path={paths.rental}></HeaderButton>
+        {/* <HeaderButton name="Logout" selected={pathname === paths.logout} path={paths.logout}></HeaderButton> */}
       </div>
     </div>
   )
