@@ -15,5 +15,6 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 'warn',
     "indent": ["error", 2],
+    "semi": ["error", "always"]
   },
-}
+};

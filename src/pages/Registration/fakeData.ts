@@ -6,4 +6,4 @@ export const fakeEventData = [
   {title: "Kickboxing", subtitle: "Combatant's Room", eventType: 'Instructed Program', ageRange: 'All Ages', content: "Basketball dropin asdlkfjalkdfjklajsdflkjasjldkf", date: "06/04/2023 8:30 AM", buttonDisabled: true},
   {title: "Basketball Dropin", subtitle: "Gymnasium A", eventType: 'Drop-in', ageRange: 'Adults', content: "Basketball dropin asdlkfjalkdfjklajsdflkjasjldkf", date: "06/04/2023 8:30 AM", buttonDisabled: false},
   {title: "Basketball Dropin", subtitle: "Gymnasium A", eventType: 'Drop-in', ageRange: 'Adults', content: "Basketball dropin asdlkfjalkdfjklajsdflkjasjldkf", date: "06/04/2023 8:30 AM", buttonDisabled: false},
-]
+];

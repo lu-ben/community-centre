@@ -10,6 +10,7 @@ export type CardProps = {
   eventType?: string;
   tags?: string[];
   bulletin?: boolean;
+  userType?: string;
 }
 
 export const paths = {
@@ -22,7 +23,7 @@ export const paths = {
   announcement: '/announcement',
   logout: '/logout',
   history: '/history',
-}
+};
 
 // typeIndex === 0 is for events
 // typeIndex === 1 is for equipments
@@ -40,12 +41,12 @@ export const cardButtonTypes = [
     enabled: 'Approve',
     disabled: 'Approved',
   }
-]
+];
 
 export const USERTYPES = {
   EMPLOYEE: 'employee',
   CLIENT: 'client',
-}
+};
 
 export const ModalStyles = {
   content: {
@@ -64,3 +65,14 @@ export const ModalStyles = {
     backgroundColor: 'rgba(70, 70, 70, 0.50)',
   },
 };
+
+export const HEADER_TEXT = {
+  ['/dashboard']: `Welcome back, user!`,
+  ['/registration']: 'Register for a class or drop-in',
+  ['/rental']: 'Borrow your favourite equipment',
+  ['/announcement']: 'The lastest news',
+  ['/bulletin']: 'Connect with the community',
+  ['/history']: 'Your pass sessions',
+};
+
+export const API_BASE_URL = 'http://127.0.0.1:9090';

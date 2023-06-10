@@ -14,8 +14,8 @@ export const Registration = () => {
   const [eventData, setEventData] = useState<CardProps[]>(fakeEventData);
 
   useEffect(() => {
-    setTimeout(()=> setLoading(false), 1000)
-  }, [])
+    setTimeout(()=> setLoading(false), 1000);
+  }, []);
 
   return (
     <>
@@ -53,5 +53,5 @@ export const Registration = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

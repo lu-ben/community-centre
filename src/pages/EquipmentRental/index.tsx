@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { CardProps } from "../../utils/enum";
-import { fakeRentalData } from './fakeData'
+import { fakeRentalData } from './fakeData';
 import { BarLoader } from "react-spinners";
 import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
@@ -12,8 +12,8 @@ export const EquipmentRental = () => {
   const [rentalData, setRentaldata] = useState<CardProps[]>(fakeRentalData);
 
   useEffect(() => {
-    setTimeout(()=> setLoading(false), 1000)
-  }, [])
+    setTimeout(()=> setLoading(false), 1000);
+  }, []);
 
   return (
     <>
@@ -42,5 +42,5 @@ export const EquipmentRental = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

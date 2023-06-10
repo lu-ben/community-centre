@@ -21,4 +21,4 @@ export const TextArea = ({label, value, onChange, height = ""}: TextAreaProps) =
       </textarea>
     </div>
   );
-}
+};

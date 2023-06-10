@@ -1,7 +1,6 @@
-import React from 'react'
-import { CardProps, cardButtonTypes } from '../../utils/enum'
-import { Button } from '../Button'
-import { Tag } from '../Tags'
+import { CardProps, USERTYPES, cardButtonTypes } from '../../utils/enum';
+import { Button } from '../Button';
+import { Tag } from '../Tags';
 
 export const Card = ({ 
   title,
@@ -15,17 +14,24 @@ export const Card = ({
   eventType,
   tags,
   bulletin = false,
+  userType,
 }: CardProps) => 
   tall 
     ? (
       <div className='bg-light-blue rounded-xl px-6 py-4 min-w-card max-h-card w-full mb-4'>
 
-        {bulletin ? (
+        {bulletin && userType === USERTYPES.EMPLOYEE ? (
           <div className='flex'>
             <div className='grow'>
               <h3 className='text-2xl text-left font-bold'>{title}</h3>
               <p className='text-xs text-left italic'>{subtitle}</p>
               <p className='text-xs text-left font-semibold'>{date}</p>
+            </div>
+            <div className='grow-0'>
+              <Button 
+                name="Delete"
+                color='bg-light-blue'
+              />
             </div>
             <div className='grow-0'>
               <Button 
@@ -71,4 +77,4 @@ export const Card = ({
           disabled={buttonDisabled}
         />
       </div>
-    )
+    );

@@ -1,16 +1,16 @@
-import React from 'react'
-import { useState } from 'react'
-import './App.css'
-import { Login } from './pages/Login'
-import { SignUp } from './pages/SignUp'
-import { Route, Routes, useLocation } from 'react-router-dom'
-import { Header } from './components/Header'
-import { Dashboard } from './pages/Dashboard'
-import { Registration } from './pages/Registration'
-import { EquipmentRental } from './pages/EquipmentRental'
-import { paths } from './utils/enum'
-import { Announcement } from './pages/Announcement'
-import { VirtualBulletin } from './pages/VirtualBulletin'
+import React from 'react';
+import { useState } from 'react';
+import './App.css';
+import { Login } from './pages/Login';
+import { SignUp } from './pages/SignUp';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { Header } from './components/Header';
+import { Dashboard } from './pages/Dashboard';
+import { Registration } from './pages/Registration';
+import { EquipmentRental } from './pages/EquipmentRental';
+import { paths } from './utils/enum';
+import { Announcement } from './pages/Announcement';
+import { VirtualBulletin } from './pages/VirtualBulletin';
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
         <Route path={paths.bulletin} element={<VirtualBulletin />} />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
