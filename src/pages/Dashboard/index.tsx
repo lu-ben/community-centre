@@ -11,8 +11,8 @@ export const Dashboard = () => {
   const [eventData, setEventData] = useState<CardProps[]>(fakeEventData);  
 
   useEffect(() => {
-    setTimeout(()=> setLoading(false), 500)
-  }, [])
+    setTimeout(()=> setLoading(false), 500);
+  }, []);
 
   return (
     <>
@@ -54,5 +54,5 @@ export const Dashboard = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

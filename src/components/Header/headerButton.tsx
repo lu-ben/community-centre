@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 type ButtonProps = {
   name: string,
@@ -13,5 +13,5 @@ export const HeaderButton = ({ name, selected = false, path = '/' }:ButtonProps)
     selected 
       ? <button className='bg-turqoise underline hover:underline py-2 flex-grow rounded-xl border-none outline-none focus:outline-none' onClick={() => navigate(path)}>{name}</button> 
       : <button className='bg-white hover:bg-turqoise hover:underline flex-grow py-2 rounded-xl border-none outline-none focus:outline-none' onClick={() => navigate(path)}>{name}</button>
-  )
-}
+  );
+};

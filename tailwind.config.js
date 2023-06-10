@@ -26,6 +26,7 @@ export default {
         'content-area': '70vh',
       },
       colors: {
+        'red': '#E56363',
         'turqoise': '#B9FFE4',
         'turqoise-inactive': '#97CEB8',
         'light-blue': '#E0E3EF',
@@ -35,4 +36,4 @@ export default {
     },
   },
   plugins: [],
-}
+};

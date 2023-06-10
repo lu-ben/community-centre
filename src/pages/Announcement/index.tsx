@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { CardProps, ModalStyles, USERTYPES } from "../../utils/enum";
-import { fakeAnnouncementData } from './fakeData'
+import { fakeAnnouncementData } from './fakeData';
 import { BarLoader } from "react-spinners";
 import ReactModal from "react-modal";
 import { Button } from "../../components/Button";
@@ -18,8 +18,8 @@ export const Announcement = () => {
 
 
   useEffect(() => {
-    setTimeout(()=> setLoading(false), 1000)
-  }, [])
+    setTimeout(()=> setLoading(false), 1000);
+  }, []);
 
   return (
     <>
@@ -59,5 +59,5 @@ export const Announcement = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

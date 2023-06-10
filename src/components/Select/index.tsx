@@ -1,5 +1,5 @@
-import react from 'react'
-import { default as ReactSelect } from 'react-select'
+import react from 'react';
+import { default as ReactSelect } from 'react-select';
 
 type SelectProps = {
   label: string;
@@ -13,9 +13,9 @@ export const Select = ({label, options, width="w-full"}: SelectProps) => (
     <select className='rounded-3xl w-full py-2 px-4 bg-light-blue border-none outline-none focus:outline-none'>
       {options ? (
         options.map((value: string) => <option value={value}>{value}</option>
-      )) : (
+        )) : (
         <><option value="volvo">Volvo</option><option value="saab">Saab</option><option value="mercedes">Mercedes</option><option value="audi">Audi</option></>
       )}
     </select>
   </div>
-)
+);

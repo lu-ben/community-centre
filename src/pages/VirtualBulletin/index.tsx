@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { CardProps, ModalStyles, USERTYPES } from "../../utils/enum";
-import { fakeBulletinData } from './fakeData'
+import { fakeBulletinData } from './fakeData';
 import { BarLoader } from "react-spinners";
 import { useUser } from "../../hooks/useUser";
 import { Button } from "../../components/Button";
@@ -16,8 +16,8 @@ export const VirtualBulletin = () => {
   const [isOpen, setIsOpen] = useState(false);
  
   useEffect(() => {
-    setTimeout(()=> setLoading(false), 1000)
-  }, [])
+    setTimeout(()=> setLoading(false), 1000);
+  }, []);
 
   return (
     <>
@@ -50,10 +50,11 @@ export const VirtualBulletin = () => {
                 buttonDisabled={item.buttonDisabled}
                 typeIndex={2}
                 bulletin
+                userType={userHook.hookUserCookie.user.userType}
               />)
           }
         </div>
       </div>
     </>
-  )
-}
+  );
+};
