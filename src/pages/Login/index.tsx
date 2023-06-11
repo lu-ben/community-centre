@@ -3,6 +3,7 @@ import { Button } from "../../components/Button";
 import { useUser } from "../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../../utils/enum";
+import { ErrorText } from "../../components/ErrorText";
 
 export const Login = () => {
   const hook = useUser();
@@ -13,7 +14,7 @@ export const Login = () => {
       <p className="text-4xl font-bold text-white">Welcome back to the</p>
       <p className="text-6xl font-bold text-white">Community Center!</p>
       <div className=" bg-white py-12 px-10 mt-8 rounded-2xl justify-self-center w-80">
-        {hook.hookError && <p className="text-base text-red mb-4">Incorrect Username or Pin!</p>}
+        {hook.hookError && <ErrorText message="Incorrect Username or Pin!"/>}
         <InputText label='Username' value={hook.hookUsername} onChange={hook.hookSetUsername}/>
         <InputText label ='Pin' value={hook.hookPin} onChange={hook.hookSetPin}/>
         <div className="mt-8 grid grid-cols-2 h-14">
