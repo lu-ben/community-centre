@@ -13,6 +13,15 @@ export type CardProps = {
   userType?: string;
 }
 
+export type RowProps = {
+  title: string;
+  date: string;
+  location: string;
+  type?: string;
+  first?: boolean;
+  last?: boolean;
+}
+
 export const paths = {
   login: '/',
   signup: '/signup',
@@ -66,13 +75,12 @@ export const ModalStyles = {
   },
 };
 
-export const HEADER_TEXT = {
-  ['/dashboard']: `Welcome back, user!`,
+export const HEADER_TEXT: { [key: string]: string }= {
   ['/registration']: 'Register for a class or drop-in',
   ['/rental']: 'Borrow your favourite equipment',
-  ['/announcement']: 'The lastest news',
-  ['/bulletin']: 'Connect with the community',
-  ['/history']: 'Your pass sessions',
+  ['/announcement']: 'The lastest news about your facility',
+  ['/bulletin']: 'Connect with the local community',
+  ['/history']: 'View & edit your event history',
 };
 
 export const API_BASE_URL = 'http://127.0.0.1:9090';

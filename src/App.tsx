@@ -1,5 +1,3 @@
-import React from 'react';
-import { useState } from 'react';
 import './App.css';
 import { Login } from './pages/Login';
 import { SignUp } from './pages/SignUp';
@@ -11,6 +9,7 @@ import { EquipmentRental } from './pages/EquipmentRental';
 import { paths } from './utils/enum';
 import { Announcement } from './pages/Announcement';
 import { VirtualBulletin } from './pages/VirtualBulletin';
+import { PastEvents } from './pages/PastEvents';
 
 
 function App() {
@@ -26,6 +25,7 @@ function App() {
         <Route path={paths.rental} element={<EquipmentRental />} />
         <Route path={paths.announcement} element={<Announcement />} />
         <Route path={paths.bulletin} element={<VirtualBulletin />} />
+        <Route path={paths.history} element={<PastEvents />} />
       </Routes>
     </div>
   );
