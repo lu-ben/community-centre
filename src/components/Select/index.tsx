@@ -1,16 +1,14 @@
-import react from 'react';
-import { default as ReactSelect } from 'react-select';
-
 type SelectProps = {
   label: string;
   options?: string[];
   width?: string;
+  onChange: any;
 }
 
-export const Select = ({label, options, width="w-full"}: SelectProps) => (
+export const Select = ({label, options, width="w-full", onChange}: SelectProps) => (
   <div className={`pb-3 ${width}`}>
     <p className="text-left mb-2">{label}</p>
-    <select className='rounded-3xl w-full py-2 px-4 bg-light-blue border-none outline-none focus:outline-none'>
+    <select onChange={onChange} className='rounded-3xl w-full py-2 px-4 bg-light-blue border-none outline-none focus:outline-none'>
       {options ? (
         options.map((value: string) => <option value={value}>{value}</option>
         )) : (
