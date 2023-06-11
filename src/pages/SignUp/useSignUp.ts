@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../utils/enum";
+import { useState } from "react";
+import { API_BASE_URL, USERTYPES } from "../../utils/enum";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const useSignUp = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState<{ [key: string]: string}>({});
-  const [userType, setUserType] = useState('');
+  const [userType, setUserType] = useState(USERTYPES.CLIENT);
   const [error, setError] = useState(false);
  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
@@ -36,11 +36,6 @@ export const useSignUp = () => {
       setError(true);
     }
   };
-
-  useEffect(() => {
-    console.log(input);
-  }, [input]);
-
 
   return {
     hookInputs: input,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { CardProps, ModalStyles, USERTYPES } from "../../utils/enum";
 import { fakeAnnouncementData } from './fakeData';
@@ -31,8 +31,8 @@ export const Announcement = () => {
             <Button name="Post" onClick={() => setIsOpen(false)}/>
           </div>
           <InputText label={"Title"} />
-          <Select label="Related Facilities" />
-          <Select label="Related Events" />
+          <Select label="Related Facilities" onChange={undefined} />
+          <Select label="Related Events" onChange={undefined} />
           <TextArea label={"Content"} height="h-56"/>
         </div>
       </ReactModal>
