@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
-import { CardProps, ModalStyles, USERTYPES } from "../../utils/enum";
+import { CardProps, ModalStyles, ACCOUNTTYPES } from "../../utils/enum";
 import { fakeBulletinData } from './fakeData';
 import { BarLoader } from "react-spinners";
 import { useUser } from "../../hooks/useUser";
@@ -34,7 +34,7 @@ export const VirtualBulletin = () => {
       </ReactModal>
       <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl gap-10 px-12 py-10 mb-12">
         <div className="col-span-4 min-h-screen">
-          {userHook.hookUserCookie.user?.userType === USERTYPES.CLIENT &&
+          {userHook.hookUserCookie.user?.accountType === ACCOUNTTYPES.CLIENT &&
             <div className="mb-4 flex">
               <Button name="Create a Bulletin Post +" color="bg-light-blue" onClick={ () => setIsOpen(true) }/>
             </div>
@@ -50,7 +50,7 @@ export const VirtualBulletin = () => {
                 buttonDisabled={item.buttonDisabled}
                 typeIndex={2}
                 bulletin
-                userType={userHook.hookUserCookie.user.userType}
+                accountType={userHook.hookUserCookie.user.accountType}
               />)
           }
         </div>

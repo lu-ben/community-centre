@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ModalStyles, RowProps, USERTYPES } from "../../utils/enum";
+import { ModalStyles, RowProps, ACCOUNTTYPES } from "../../utils/enum";
 import { fakeHistoryData } from './fakeData';
 import { BarLoader } from "react-spinners";
 import ReactModal from "react-modal";
@@ -36,7 +36,7 @@ export const PastEvents = () => {
       </ReactModal>
       <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl gap-10 px-12 py-10 mb-12">
         <div className="col-span-4 min-h-screen">
-          {userHook.hookUserCookie.user?.userType === USERTYPES.CLIENT &&
+          {userHook.hookUserCookie.user?.accountType === ACCOUNTTYPES.CLIENT &&
             <div className="mb-4 flex">
               <Button name="Record an unscheduled drop-in +" color="bg-light-blue" onClick={ () => setIsOpen(true) }/>
             </div>
