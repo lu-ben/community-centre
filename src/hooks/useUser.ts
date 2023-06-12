@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import axios from "axios";
 import { useState } from "react";
-import { API_BASE_URL, ACCOUNTTYPES } from "../utils/enum";
+import { API_BASE_URL } from "../utils/enum";
 
 export const useUser = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export const useUser = () => {
         method: 'get',
         url: '/account/login',
         params: { username, pin },
-        headers: { 'Content-Type': 'application/json' }   
+        headers: { 'Content-Type': 'application/json' }
       });
 
       if (res.status === 200) {
@@ -57,7 +57,6 @@ export const useUser = () => {
     hookSetPin: handleSetPin,
 
     hookError: error,
-    
     hookUserCookie: cookie,
     hookHandleLogin: handleLogin,
     hookHandleLogout: handleLogout,

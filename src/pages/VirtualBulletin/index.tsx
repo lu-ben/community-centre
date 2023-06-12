@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
-import { CardProps, ModalStyles, ACCOUNTTYPES } from "../../utils/enum";
+import { CardProps, ModalStyles, ACCOUNT_TYPES } from "../../utils/enum";
 import { fakeBulletinData } from './fakeData';
 import { BarLoader } from "react-spinners";
 import { useUser } from "../../hooks/useUser";
@@ -14,7 +14,7 @@ export const VirtualBulletin = () => {
   const [loading, setLoading] = useState(true);
   const [bulletinData, setBulletinData] = useState<CardProps[]>(fakeBulletinData);
   const [isOpen, setIsOpen] = useState(false);
- 
+
   useEffect(() => {
     setTimeout(()=> setLoading(false), 1000);
   }, []);
@@ -34,17 +34,17 @@ export const VirtualBulletin = () => {
       </ReactModal>
       <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl gap-10 px-12 py-10 mb-12">
         <div className="col-span-4 min-h-screen">
-          {userHook.hookUserCookie.user?.accountType === ACCOUNTTYPES.CLIENT &&
+          {userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.CLIENT &&
             <div className="mb-4 flex">
               <Button name="Create a Bulletin Post +" color="bg-light-blue" onClick={ () => setIsOpen(true) }/>
             </div>
           }
           {loading ?
             <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
-            bulletinData.map((item: CardProps) => 
-              <Card 
-                title={item.title} 
-                date={item.date} 
+            bulletinData.map((item: CardProps) =>
+              <Card
+                title={item.title}
+                date={item.date}
                 subtitle={item.subtitle}
                 content={item.content}
                 buttonDisabled={item.buttonDisabled}

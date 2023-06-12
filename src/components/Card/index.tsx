@@ -1,26 +1,26 @@
-import { CardProps, ACCOUNTTYPES, cardButtonTypes } from '../../utils/enum';
+import { CardProps, ACCOUNT_TYPES, cardButtonTypes } from '../../utils/enum';
 import { Button } from '../Button';
 import { Tag } from '../Tags';
 
-export const Card = ({ 
+export const Card = ({
   title,
-  date, 
-  subtitle, 
-  content, 
-  tall = true, 
-  buttonDisabled, 
+  date,
+  subtitle,
+  content,
+  tall = true,
+  buttonDisabled,
   typeIndex = 1,
   ageRange,
   eventType,
   tags,
   bulletin = false,
   accountType,
-}: CardProps) => 
-  tall 
+}: CardProps) =>
+  tall
     ? (
       <div className='bg-light-blue rounded-xl px-6 py-4 min-w-card max-h-card w-full mb-4'>
 
-        {bulletin && accountType === ACCOUNTTYPES.EMPLOYEE ? (
+        {bulletin && accountType === ACCOUNT_TYPES.EMPLOYEE ? (
           <div className='flex'>
             <div className='grow'>
               <h3 className='text-2xl text-left font-bold'>{title}</h3>
@@ -28,22 +28,22 @@ export const Card = ({
               <p className='text-xs text-left font-semibold'>{date}</p>
             </div>
             <div className='grow-0'>
-              <Button 
+              <Button
                 name="Delete"
                 color='bg-light-blue'
               />
             </div>
             <div className='grow-0'>
-              <Button 
+              <Button
                 name={
-                  buttonDisabled 
-                    ? cardButtonTypes[typeIndex].disabled 
-                    : cardButtonTypes[typeIndex].enabled} 
+                  buttonDisabled
+                    ? cardButtonTypes[typeIndex].disabled
+                    : cardButtonTypes[typeIndex].enabled}
                 disabled={buttonDisabled}
               />
             </div>
           </div>
-        ) 
+        )
           :
           (
             <>
@@ -69,11 +69,11 @@ export const Card = ({
         <div className='col-span-2'>
           { content && <p className="pt-2 text-xs text-left col-span-2 overflow-hidden">{content}</p> }
         </div>
-        <Button 
+        <Button
           name={
-            buttonDisabled 
-              ? cardButtonTypes[typeIndex].disabled 
-              : cardButtonTypes[typeIndex].enabled} 
+            buttonDisabled
+              ? cardButtonTypes[typeIndex].disabled
+              : cardButtonTypes[typeIndex].enabled}
           disabled={buttonDisabled}
         />
       </div>

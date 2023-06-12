@@ -52,9 +52,15 @@ export const cardButtonTypes = [
   }
 ];
 
-export const ACCOUNTTYPES = {
+export const ACCOUNT_TYPES = {
   EMPLOYEE: 'employee',
   CLIENT: 'client',
+};
+
+export const EMPLOYEE_ROLES = {
+  INSTRUCTOR: 'instructor',
+  RECEPTIONIST: 'receptionist',
+  MANAGER: 'manager',
 };
 
 export const ModalStyles = {
