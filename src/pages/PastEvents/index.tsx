@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ModalStyles, RowProps, ACCOUNTTYPES } from "../../utils/enum";
+import { ModalStyles, RowProps, ACCOUNT_TYPES } from "../../utils/enum";
 import { fakeHistoryData } from './fakeData';
 import { BarLoader } from "react-spinners";
 import ReactModal from "react-modal";
@@ -36,17 +36,17 @@ export const PastEvents = () => {
       </ReactModal>
       <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl gap-10 px-12 py-10 mb-12">
         <div className="col-span-4 min-h-screen">
-          {userHook.hookUserCookie.user?.accountType === ACCOUNTTYPES.CLIENT &&
+          {userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.CLIENT &&
             <div className="mb-4 flex">
               <Button name="Record an unscheduled drop-in +" color="bg-light-blue" onClick={ () => setIsOpen(true) }/>
             </div>
           }
           {loading ?
             <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
-            historyData.map((item: RowProps, index: number) => 
-              <Row 
-                title={item.title} 
-                date={item.date} 
+            historyData.map((item: RowProps, index: number) =>
+              <Row
+                title={item.title}
+                date={item.date}
                 location={item.location}
                 type={item.type}
                 first={index === 0}

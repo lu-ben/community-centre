@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
-import { CardProps, ACCOUNTTYPES } from "../../utils/enum";
+import { CardProps, ACCOUNT_TYPES } from "../../utils/enum";
 import { fakeEventData } from "./fakeData";
 import { BarLoader } from "react-spinners";
 import { Select } from "../../components/Select";
@@ -30,19 +30,19 @@ export const Registration = () => {
           </div>
         </div>
         <div className="col-span-4 min-h-screen">
-          {userHook.hookUserCookie.user?.accountType === ACCOUNTTYPES.EMPLOYEE &&
+          {userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.EMPLOYEE &&
             <div className="my-4 flex">
               <Button name="Add Events +" color="bg-light-blue"/>
             </div>
           }
           {loading ?
             <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
-            eventData.map((item: CardProps) => 
-              <Card 
-                title={item.title} 
-                date={item.date} 
+            eventData.map((item: CardProps) =>
+              <Card
+                title={item.title}
+                date={item.date}
                 subtitle={item.subtitle}
-                tall={false} 
+                tall={false}
                 content={item.content}
                 buttonDisabled={item.buttonDisabled}
                 typeIndex={0}
