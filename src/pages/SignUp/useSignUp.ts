@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { API_BASE_URL, USERTYPES } from "../../utils/enum";
+import { API_BASE_URL, ACCOUNTTYPES } from "../../utils/enum";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const useSignUp = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState<{ [key: string]: string}>({});
-  const [userType, setUserType] = useState(USERTYPES.CLIENT);
+  const [accountType, setAccountType] = useState(ACCOUNTTYPES.CLIENT);
   const [error, setError] = useState(false);
  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
@@ -16,7 +16,7 @@ export const useSignUp = () => {
   };
  
   const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserType(e.target.value);
+    setAccountType(e.target.value);
   };
 
   const handleSubmit = async () => {
@@ -25,7 +25,7 @@ export const useSignUp = () => {
         baseURL: API_BASE_URL,
         method: 'get',
         url: '/account/signup',
-        params: { ...input, userType },
+        params: { ...input, accountType },
         headers: { 'Content-Type': null }   
       });
       if (res.status === 200) {

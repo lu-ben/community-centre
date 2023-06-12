@@ -1,4 +1,4 @@
-import { CardProps, USERTYPES, cardButtonTypes } from '../../utils/enum';
+import { CardProps, ACCOUNTTYPES, cardButtonTypes } from '../../utils/enum';
 import { Button } from '../Button';
 import { Tag } from '../Tags';
 
@@ -14,13 +14,13 @@ export const Card = ({
   eventType,
   tags,
   bulletin = false,
-  userType,
+  accountType,
 }: CardProps) => 
   tall 
     ? (
       <div className='bg-light-blue rounded-xl px-6 py-4 min-w-card max-h-card w-full mb-4'>
 
-        {bulletin && userType === USERTYPES.EMPLOYEE ? (
+        {bulletin && accountType === ACCOUNTTYPES.EMPLOYEE ? (
           <div className='flex'>
             <div className='grow'>
               <h3 className='text-2xl text-left font-bold'>{title}</h3>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
-import { CardProps, USERTYPES } from "../../utils/enum";
+import { CardProps, ACCOUNTTYPES } from "../../utils/enum";
 import { fakeEventData } from "./fakeData";
 import { BarLoader } from "react-spinners";
 import { Select } from "../../components/Select";
@@ -30,7 +30,7 @@ export const Registration = () => {
           </div>
         </div>
         <div className="col-span-4 min-h-screen">
-          {userHook.hookUserCookie.user?.userType === USERTYPES.EMPLOYEE &&
+          {userHook.hookUserCookie.user?.accountType === ACCOUNTTYPES.EMPLOYEE &&
             <div className="my-4 flex">
               <Button name="Add Events +" color="bg-light-blue"/>
             </div>

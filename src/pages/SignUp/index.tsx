@@ -1,7 +1,7 @@
 import { InputText } from "../../components/InputText";
 import { Button } from "../../components/Button";
 import { Select } from "../../components/Select";
-import { USERTYPES } from "../../utils/enum";
+import { ACCOUNTTYPES } from "../../utils/enum";
 import { useNavigate } from "react-router-dom";
 import { useSignUp } from "./useSignUp";
 import { ErrorText } from "../../components/ErrorText";
@@ -21,7 +21,7 @@ export const SignUp = () => {
         <InputText label ='Last Name' width="col-span-2" value={hook.hookInputs.lastName} onChange={(e) => hook.hookHandleChange(e, 'lastName')} />
         <InputText label='Username' width="col-span-3" value={hook.hookInputs.username} onChange={(e) => hook.hookHandleChange(e, 'username')} />
         <InputText label ='Age' width="col-span-1" value={hook.hookInputs.age} onChange={(e) => hook.hookHandleChange(e, 'age')}  />
-        <Select label='User Type' options={[USERTYPES.CLIENT, USERTYPES.EMPLOYEE]} width="col-span-4" onChange={hook.hookHandleSelect}/>
+        <Select label='User Type' options={[ACCOUNTTYPES.CLIENT, ACCOUNTTYPES.EMPLOYEE]} width="col-span-4" onChange={hook.hookHandleSelect}/>
         <InputText label ='Pin' width="col-span-4" value={hook.hookInputs.pin} onChange={(e) => hook.hookHandleChange(e, 'pin')} />
         <div className="col-span-4">
           <div className="mt-4 grid grid-cols-2 h-14">

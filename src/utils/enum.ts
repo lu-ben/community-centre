@@ -10,7 +10,7 @@ export type CardProps = {
   eventType?: string;
   tags?: string[];
   bulletin?: boolean;
-  userType?: string;
+  accountType?: string;
 }
 
 export type RowProps = {
@@ -52,7 +52,7 @@ export const cardButtonTypes = [
   }
 ];
 
-export const USERTYPES = {
+export const ACCOUNTTYPES = {
   EMPLOYEE: 'employee',
   CLIENT: 'client',
 };

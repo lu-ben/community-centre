@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import axios from "axios";
 import { useState } from "react";
-import { API_BASE_URL, USERTYPES } from "../utils/enum";
+import { API_BASE_URL, ACCOUNTTYPES } from "../utils/enum";
 
 export const useUser = () => {
   const navigate = useNavigate();
@@ -33,9 +33,9 @@ export const useUser = () => {
         setError(false);
         setCookie('user', {
           username: res.data.username,
-          userType: res.data.userType,
+          accountType: res.data.accountType,
           firstName: res.data.firstName,
-          typeSpecificId: res.data.userType === USERTYPES.EMPLOYEE ? res.data.employeeId : res.data.clientId,
+          typeSpecificId: res.data.typeSpecificId,
         });
         navigate('/dashboard');
       }

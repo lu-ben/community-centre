@@ -1,17 +1,39 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
-import { CardProps } from "../../utils/enum";
-import { fakeAnnouncementData, fakeBulletinPostData, fakeEventData } from "./fakeData";
+import { API_BASE_URL, CardProps } from "../../utils/enum";
 import { BarLoader } from "react-spinners";
+import { useUser } from "../../hooks/useUser";
 
 export const Dashboard = () => {
+  const userHook = useUser();
   const [loading, setLoading] = useState(true);
-  const [announcementData, setAnnouncementData] = useState<CardProps>(fakeAnnouncementData);
-  const [bulletinData, setBulletinData] = useState<CardProps[]>(fakeBulletinPostData);
-  const [eventData, setEventData] = useState<CardProps[]>(fakeEventData);  
+  const [announcementData, setAnnouncementData] = useState<CardProps>();
+  const [bulletinData, setBulletinData] = useState<CardProps[]>();
+  const [eventData, setEventData] = useState<CardProps[]>();  
 
-  useEffect(() => {
-    setTimeout(()=> setLoading(false), 500);
+  const handleFetch = async () => {
+    try {
+      const res = await axios({
+        baseURL: API_BASE_URL,
+        method: 'get',
+        url: '/dashboard',
+        params: { accountType: userHook.hookUserCookie.user?.accountType, typeSpecificId: userHook.hookUserCookie.user?.typeSpecificId },
+        headers: { 'Content-Type': null }   
+      });
+      if (res.status === 200) {
+        if (res.data.announcement) setAnnouncementData(res.data.announcement);
+        if (res.data.bulletinPosts) setBulletinData(res.data.bulletinPosts);
+        if (res.data.events) setEventData(res.data.events);
+        setLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => { 
+    handleFetch();
   }, []);
 
   return (
@@ -23,18 +45,18 @@ export const Dashboard = () => {
             {loading 
               ? <BarLoader loading color='#343B53'/> 
               : <Card 
-                title={announcementData.title} 
-                tags={announcementData.tags} 
-                date={announcementData.date} 
-                subtitle={announcementData.subtitle} 
-                content={announcementData.content} 
+                title={announcementData?.title || ''} 
+                tags={announcementData?.tags} 
+                date={announcementData?.date || ''} 
+                subtitle={announcementData?.subtitle || ''} 
+                content={announcementData?.content} 
               />
             }
           </div>
           <h2 className="text-left text-4xl font-bold mb-6">Virtual Bulletin Board</h2>
           {loading 
             ? <BarLoader loading color='#343B53'/> 
-            : bulletinData.map((item: CardProps, index: number) => (
+            : bulletinData?.map((item: CardProps, index: number) => (
               <Card 
                 title={item.title} 
                 subtitle={item.subtitle} 
@@ -49,7 +71,7 @@ export const Dashboard = () => {
           <h2 className="text-left text-4xl font-bold mb-6">Upcoming Events</h2>
           {loading ?
             <BarLoader loading color='#343B53'/> :
-            eventData.map((item: CardProps, index: number) => <Card title={item.title} date={item.date} subtitle={item.subtitle} key={index}/>)
+            eventData?.map((item: CardProps, index: number) => <Card title={item.title} date={item.date} subtitle={item.subtitle} key={index}/>)
           }
         </div>
       </div>
