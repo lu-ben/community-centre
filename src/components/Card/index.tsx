@@ -8,13 +8,15 @@ export const Card = ({
   subtitle,
   content,
   tall = true,
-  buttonDisabled,
+  disabled,
   typeIndex = 1,
-  ageRange,
-  eventType,
+  age,
+  type,
   tags,
   bulletin = false,
   accountType,
+  id,
+  onClick = () => '',
 }: CardProps) =>
   tall
     ? (
@@ -36,10 +38,10 @@ export const Card = ({
             <div className='grow-0'>
               <Button
                 name={
-                  buttonDisabled
+                  disabled
                     ? cardButtonTypes[typeIndex].disabled
                     : cardButtonTypes[typeIndex].enabled}
-                disabled={buttonDisabled}
+                disabled={disabled}
               />
             </div>
           </div>
@@ -58,23 +60,25 @@ export const Card = ({
       </div>
     ) : (
       <div className='bg-light-blue rounded-xl px-6 py-4 min-w-card max-h-card w-full mb-4 grid grid-cols-5'>
-        <div className='col-span-2'>
+        <div className={`${content ? 'col-span-2' : 'col-span-4'}`}>
           <h3 className='text-2xl text-left font-bold'>{title}</h3>
           <p className='text-xs text-left font-bold italic'>{subtitle}</p>
           <p className='text-xs text-left font-semibold'>{date}</p>
           <div className='mt-2'>
-            {ageRange && eventType && <p className='text-xs text-left'>{eventType} | {ageRange}</p>}
+            {age && type && <p className='text-xs text-left'>{type.toUpperCase()} | {age === 'all' ? `${age.toUpperCase()} AGES` : age.toUpperCase()}</p>}
           </div>
         </div>
-        <div className='col-span-2'>
-          { content && <p className="pt-2 text-xs text-left col-span-2 overflow-hidden">{content}</p> }
-        </div>
+        {content && (
+          <div className='col-span-2'>
+            <p className="pt-2 text-xs text-left overflow-hidden">{content}</p>
+          </div>)}
         <Button
           name={
-            buttonDisabled
+            disabled
               ? cardButtonTypes[typeIndex].disabled
               : cardButtonTypes[typeIndex].enabled}
-          disabled={buttonDisabled}
+          disabled={disabled}
+          onClick={()=> onClick(id)}
         />
       </div>
     );

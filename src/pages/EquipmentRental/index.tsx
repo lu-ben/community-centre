@@ -35,7 +35,7 @@ export const EquipmentRental = () => {
                 subtitle={item.subtitle}
                 tall={false} 
                 content={item.content}
-                buttonDisabled={item.buttonDisabled}
+                disabled={item.disabled}
                 typeIndex={1}
               />)
           }

@@ -51,7 +51,7 @@ export const Announcement = () => {
                 date={item.date}
                 subtitle={item.subtitle}
                 content={item.content}
-                buttonDisabled={item.buttonDisabled}
+                disabled={item.disabled}
                 typeIndex={1}
                 tags={item.tags}
               />)

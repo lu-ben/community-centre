@@ -11,7 +11,7 @@ export const InputText = ({label, value, onChange, height = "", width = 'w-full'
   <div className={`pb-3 ${width}`}>
     <div className="text-left mb-2">{label}</div>
     <input
-      className={`bg-light-blue rounded-2xl px-4 py-1 w-full border-none outline-none focus:outline-none ${height}`}
+      className={`bg-light-blue rounded-3xl px-4 py-1.5 w-full border-none outline-none focus:outline-none ${height}`}
       value={value}
       onChange={onChange}
     />
