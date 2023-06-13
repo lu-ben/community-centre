@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
-import { API_BASE_URL, CardProps } from "../../utils/enum";
+import { API_BASE_URL, CardProps, DATE_FORMATTER } from "../../utils/enum";
 import { BarLoader } from "react-spinners";
 import { useUser } from "../../hooks/useUser";
 
@@ -47,7 +47,7 @@ export const Dashboard = () => {
               : <Card 
                 title={announcementData?.title || ''} 
                 tags={announcementData?.tags} 
-                date={announcementData?.date || ''} 
+                date={DATE_FORMATTER(announcementData?.date || '')} 
                 subtitle={announcementData?.subtitle || ''} 
                 content={announcementData?.content} 
               />
@@ -60,7 +60,7 @@ export const Dashboard = () => {
               <Card 
                 title={item.title} 
                 subtitle={item.subtitle} 
-                date={item.date} 
+                date={DATE_FORMATTER(item.date)} 
                 content={item.content} 
                 key={index}
               />
@@ -71,7 +71,7 @@ export const Dashboard = () => {
           <h2 className="text-left text-4xl font-bold mb-6">Upcoming Events</h2>
           {loading ?
             <BarLoader loading color='#343B53'/> :
-            eventData?.map((item: CardProps, index: number) => <Card title={item.title} date={item.date} subtitle={item.subtitle} key={index}/>)
+            eventData?.map((item: CardProps, index: number) => <Card title={item.title} date={DATE_FORMATTER(item.date)} subtitle={item.subtitle} key={index}/>)
           }
         </div>
       </div>
