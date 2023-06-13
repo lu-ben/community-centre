@@ -47,7 +47,7 @@ export const VirtualBulletin = () => {
                 date={item.date}
                 subtitle={item.subtitle}
                 content={item.content}
-                buttonDisabled={item.buttonDisabled}
+                disabled={item.disabled}
                 typeIndex={2}
                 bulletin
                 accountType={userHook.hookUserCookie.user.accountType}

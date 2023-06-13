@@ -1,35 +1,80 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Card } from "../../components/Card";
-import { CardProps, ACCOUNT_TYPES } from "../../utils/enum";
-import { fakeEventData } from "./fakeData";
+import { CardProps, ACCOUNT_TYPES, API_BASE_URL, DATE_FORMATTER } from "../../utils/enum";
 import { BarLoader } from "react-spinners";
 import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
-import { InputText } from "../../components/InputText";
 import { useUser } from "../../hooks/useUser";
 
 export const Registration = () => {
   const userHook = useUser();
   const [loading, setLoading] = useState(true);
-  const [eventData, setEventData] = useState<CardProps[]>(fakeEventData);
+  const [eventData, setEventData] = useState<CardProps[]>();
 
-  useEffect(() => {
-    setTimeout(()=> setLoading(false), 1000);
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedAgeRange, setSelectedAgeRange] = useState('');
+  
+  const handleFetch = async () => {
+    try {
+      const res = await axios({
+        baseURL: API_BASE_URL,
+        method: 'get',
+        url: '/event',
+        params: { 
+          accountType: userHook.hookUserCookie.user?.accountType, 
+          typeSpecificId: userHook.hookUserCookie.user?.typeSpecificId,
+          selectedType,
+          selectedAgeRange,
+        },
+        headers: { 'Content-Type': null, cache: false }   
+      });
+      if (res.status === 200) {
+        if (res.data.events) setEventData(res.data.events);
+        setLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleRegister = async (id: number) => {
+    try {
+      const res = await axios({
+        baseURL: API_BASE_URL,
+        method: 'post',
+        url: '/event/register',
+        params: { 
+          eventId: id,
+          typeSpecificId: userHook.hookUserCookie.user?.typeSpecificId,
+        },
+        headers: { 'Content-Type': null }   
+      });
+      if (res.status === 200) {
+        await handleFetch();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => { 
+    handleFetch();
   }, []);
 
   return (
     <>
       <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl grid grid-cols-6 gap-10 px-12 py-10 mb-12">
-        <div className="col-span-2" >
-          <Select label="Select Date"/>
-          <Select label="Select Type"/>
-          <Select label="Select Age Range"/>
-          <InputText label="Search" />
-          <div className="my-6 flex">
-            <Button name="Search" rounded="rounded-3xl"/>
-          </div>
-        </div>
-        <div className="col-span-4 min-h-screen">
+        {userHook.hookUserCookie.user.accountType ===  ACCOUNT_TYPES.CLIENT && (
+          <div className="col-span-2" >
+            <Select label="Select Type" options={['All', 'Drop-in', 'Program']} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setSelectedType(e.target.value)}/>
+            <Select label="Select Age Range" options={['All', 'Adult', 'Child', 'Youth']} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setSelectedAgeRange(e.target.value)}/>
+            <div className="my-6 flex">
+              <Button name="Apply Filters" rounded="rounded-3xl" onClick={()=> handleFetch()}/>
+            </div>
+          </div>)}
+        <div className={`${userHook.hookUserCookie.user.accountType === ACCOUNT_TYPES.CLIENT ? 'col-span-4' : 'col-span-6'} min-h-screen`}>
+          // TODO: [optional] connection for create events for employees
           {userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.EMPLOYEE &&
             <div className="my-4 flex">
               <Button name="Add Events +" color="bg-light-blue"/>
@@ -37,17 +82,19 @@ export const Registration = () => {
           }
           {loading ?
             <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
-            eventData.map((item: CardProps) =>
+            eventData?.map((item: CardProps) =>
               <Card
                 title={item.title}
-                date={item.date}
+                date={DATE_FORMATTER(item.date)}
                 subtitle={item.subtitle}
                 tall={false}
                 content={item.content}
-                buttonDisabled={item.buttonDisabled}
+                disabled={item.disabled}
                 typeIndex={0}
-                ageRange={item.ageRange}
-                eventType={item.eventType}
+                age={item.age}
+                type={item.type}
+                onClick={handleRegister}
+                id={item.id}
               />)
           }
         </div>

@@ -4,13 +4,15 @@ export type CardProps = {
   subtitle: string;
   content?: string;
   tall?: boolean;
-  buttonDisabled?: boolean;
+  disabled?: boolean;
   typeIndex?: number;
-  ageRange?: string;
-  eventType?: string;
+  age?: string;
+  type?: string;
   tags?: string[];
   bulletin?: boolean;
   accountType?: string;
+  onClick?: any;
+  id?: number;
 }
 
 export type RowProps = {
@@ -98,5 +100,4 @@ export const DATE_FORMATTER = (date: string) => new Date(date).toLocaleDateStrin
   day: "numeric",
   hour: "2-digit",
   minute: "2-digit",
-  second: '2-digit',
 });
