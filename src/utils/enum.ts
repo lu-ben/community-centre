@@ -90,3 +90,13 @@ export const HEADER_TEXT: { [key: string]: string }= {
 };
 
 export const API_BASE_URL = 'http://127.0.0.1:9090';
+
+export const DATE_FORMATTER = (date: string) => new Date(date).toLocaleDateString('en-US', { 
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: '2-digit',
+});
