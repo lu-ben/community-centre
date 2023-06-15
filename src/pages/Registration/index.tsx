@@ -6,6 +6,7 @@ import { BarLoader } from "react-spinners";
 import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
 import { useUser } from "../../hooks/useUser";
+import { ErrorText } from "../../components/ErrorText";
 
 export const Registration = () => {
   const userHook = useUser();
@@ -14,9 +15,13 @@ export const Registration = () => {
 
   const [selectedType, setSelectedType] = useState('');
   const [selectedAgeRange, setSelectedAgeRange] = useState('');
+
+  const [employeeError, setEmployeeError] = useState(false); 
+  const [noResults, setNoResults] = useState(false);
   
   const handleFetch = async () => {
     try {
+      setLoading(true);
       const res = await axios({
         baseURL: API_BASE_URL,
         method: 'get',
@@ -30,7 +35,10 @@ export const Registration = () => {
         headers: { 'Content-Type': null, cache: false }   
       });
       if (res.status === 200) {
-        if (res.data.events) setEventData(res.data.events);
+        if (res.data.events) {
+          setEventData(res.data.events);
+          setNoResults(res.data.events.length <= 0);
+        }
         setLoading(false);
       }
     } catch (err) {
@@ -39,6 +47,10 @@ export const Registration = () => {
   };
 
   const handleRegister = async (id: number) => {
+    if (userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.EMPLOYEE) {
+      setEmployeeError(true);
+      return; 
+    }
     try {
       const res = await axios({
         baseURL: API_BASE_URL,
@@ -62,6 +74,7 @@ export const Registration = () => {
     handleFetch();
   }, []);
 
+  // TODO: [optional] connection for create events for employees
   return (
     <>
       <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl grid grid-cols-6 gap-10 px-12 py-10 mb-12">
@@ -74,12 +87,9 @@ export const Registration = () => {
             </div>
           </div>)}
         <div className={`${userHook.hookUserCookie.user.accountType === ACCOUNT_TYPES.CLIENT ? 'col-span-4' : 'col-span-6'} min-h-screen`}>
-          // TODO: [optional] connection for create events for employees
-          {userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.EMPLOYEE &&
-            <div className="my-4 flex">
-              <Button name="Add Events +" color="bg-light-blue"/>
-            </div>
-          }
+          {employeeError && <ErrorText message={"Employees cannot register for events. Please log in as a Client if you wish to do so."} />}
+          {noResults && <ErrorText color='dark-blue' message={"No records found."} />}
+          {userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.EMPLOYEE && <div className="my-4 flex"><Button name="Add Events +" color="text-dark-blue"/></div>}
           {loading ?
             <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
             eventData?.map((item: CardProps) =>
