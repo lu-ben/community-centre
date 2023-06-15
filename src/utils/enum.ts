@@ -93,7 +93,7 @@ export const HEADER_TEXT: { [key: string]: string }= {
 
 export const API_BASE_URL = 'http://127.0.0.1:9090';
 
-export const DATE_FORMATTER = (date: string) => new Date(date).toLocaleDateString('en-US', { 
+export const DATE_FORMATTER = (date: string) => new Date(date).toLocaleDateString('en-US', {
   weekday: "long",
   year: "numeric",
   month: "long",
@@ -101,3 +101,8 @@ export const DATE_FORMATTER = (date: string) => new Date(date).toLocaleDateStrin
   hour: "2-digit",
   minute: "2-digit",
 });
+
+export type SelectOption = {
+  label: string;
+  value: string;
+};

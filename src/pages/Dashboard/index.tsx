@@ -10,7 +10,7 @@ export const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [announcementData, setAnnouncementData] = useState<CardProps>();
   const [bulletinData, setBulletinData] = useState<CardProps[]>();
-  const [eventData, setEventData] = useState<CardProps[]>();  
+  const [eventData, setEventData] = useState<CardProps[]>();
 
   const handleFetch = async () => {
     try {
@@ -19,7 +19,7 @@ export const Dashboard = () => {
         method: 'get',
         url: '/dashboard',
         params: { accountType: userHook.hookUserCookie.user?.accountType, typeSpecificId: userHook.hookUserCookie.user?.typeSpecificId },
-        headers: { 'Content-Type': null }   
+        headers: { 'Content-Type': null }
       });
       if (res.status === 200) {
         if (res.data.announcement) setAnnouncementData(res.data.announcement);
@@ -32,7 +32,7 @@ export const Dashboard = () => {
     }
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     handleFetch();
   }, []);
 
@@ -42,26 +42,26 @@ export const Dashboard = () => {
         <div className="col-span-3 min-h-screen">
           <div className="mb-8 min-h-announcement">
             <h2 className="text-left text-4xl font-bold mb-6">Latest Announcement</h2>
-            {loading 
-              ? <BarLoader loading color='#343B53'/> 
-              : <Card 
-                title={announcementData?.title || ''} 
-                tags={announcementData?.tags} 
-                date={DATE_FORMATTER(announcementData?.date || '')} 
-                subtitle={announcementData?.subtitle || ''} 
-                content={announcementData?.content} 
+            {loading
+              ? <BarLoader loading color='#343B53'/>
+              : <Card
+                title={announcementData?.title || ''}
+                tags={announcementData?.tags}
+                date={DATE_FORMATTER(announcementData?.date || '')}
+                subtitle={announcementData?.subtitle || ''}
+                content={announcementData?.content}
               />
             }
           </div>
           <h2 className="text-left text-4xl font-bold mb-6">Virtual Bulletin Board</h2>
-          {loading 
-            ? <BarLoader loading color='#343B53'/> 
+          {loading
+            ? <BarLoader loading color='#343B53'/>
             : bulletinData?.map((item: CardProps, index: number) => (
-              <Card 
-                title={item.title} 
-                subtitle={item.subtitle} 
-                date={DATE_FORMATTER(item.date)} 
-                content={item.content} 
+              <Card
+                title={item.title}
+                subtitle={item.subtitle}
+                date={DATE_FORMATTER(item.date)}
+                content={item.content}
                 key={index}
               />
             ))
