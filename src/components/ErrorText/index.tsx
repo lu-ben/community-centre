@@ -1,5 +1,6 @@
 type ErrorTextProps = {
   message: string
+  color?: string
 }
 
-export const ErrorText = ({ message }: ErrorTextProps) => <p className="text-base text-red mb-4">{message}</p>;
+export const ErrorText = ({ message, color = 'text-red'}: ErrorTextProps) => <p className={`text-base ${color} mb-4`}>{message}</p>;

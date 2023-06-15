@@ -77,7 +77,7 @@ export const Announcement = () => {
       const res = await axios({
         baseURL: API_BASE_URL,
         method: 'post',
-        url: '/announcement/createAnnouncement',
+        url: '/announcement/create',
         params: {
           title,
           content,
@@ -109,7 +109,7 @@ export const Announcement = () => {
     setSelectedFacilities([]);
     setSelectedEvents([]);
     setIsOpen(false);
-  }
+  };
 
   const handleSubmit = () => {
     handleCreateAnnouncement();
@@ -155,7 +155,7 @@ export const Announcement = () => {
           }
           {loading ?
             <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
-            announcementData?.map((item: CardProps) =>
+            announcementData?.map((item: CardProps, index: number) =>
               <Card
                 title={item.title}
                 date={DATE_FORMATTER(item.date)}
@@ -164,6 +164,7 @@ export const Announcement = () => {
                 disabled={item.disabled}
                 typeIndex={1}
                 tags={item.tags}
+                key={index}
               />)
           }
         </div>

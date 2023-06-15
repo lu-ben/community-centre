@@ -16,10 +16,11 @@ export type CardProps = {
 }
 
 export type RowProps = {
-  title: string;
-  date: string;
-  location: string;
-  type?: string;
+  title?: string;
+  date?: string;
+  facility_name?: string;
+  event_type?: string;
+  age_range?: string;
   first?: boolean;
   last?: boolean;
 }
