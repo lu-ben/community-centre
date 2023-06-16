@@ -72,7 +72,6 @@ export const Announcement = () => {
   };
 
   const handleCreateAnnouncement = async () => {
-    console.log(title, content, selectedFacilities?.map((facility) => (facility?.value)), selectedEvents?.map((event) => Number(event?.value)), userHook.hookUserCookie.user?.typeSpecificId);
     try {
       const res = await axios({
         baseURL: API_BASE_URL,
