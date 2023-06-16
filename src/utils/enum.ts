@@ -109,5 +109,5 @@ export type SelectOption = {
   value: string;
 };
 
-export const SUCCESS_MESSAGE = (name: string, action: string, submission?: boolean) => `Post ${name} has been ${action} successfully${(submission && ' and is awaiting approval') || ''}!`;
+export const SUCCESS_MESSAGE = (name: string, action: string, submission?: boolean) => `Post ${name} has been ${action}${(submission && ' successfully and is awaiting approval') || ''}!`;
 export const FAIL_MESSAGE = 'Oh no! Something went wrong!';

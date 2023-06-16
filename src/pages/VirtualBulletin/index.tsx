@@ -8,6 +8,8 @@ import ReactModal from "react-modal";
 import { InputText } from "../../components/InputText";
 import { TextArea } from "../../components/TextArea";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const VirtualBulletin = () => {
   const userHook = useUser();
@@ -53,12 +55,11 @@ export const VirtualBulletin = () => {
         handleFetch();
         if (res.data.bulletin.post_id !== undefined) {
           setMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'created', true))
-        } else {
-          setMessage(FAIL_MESSAGE);
         }
       }
     } catch (err) {
       console.log(err);
+      setMessage(FAIL_MESSAGE);
     }
   };
 
@@ -75,12 +76,11 @@ export const VirtualBulletin = () => {
         handleFetch();
         if (res.data.bulletin.post_id !== undefined) {
           setMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'approved'))
-        } else {
-          setMessage(FAIL_MESSAGE);
         }
       }
     } catch (err) {
       console.log(err);
+      setMessage(FAIL_MESSAGE);
     }
   };
 
@@ -97,18 +97,23 @@ export const VirtualBulletin = () => {
         handleFetch();
         if (res.data.bulletin.post_id !== undefined) {
           setMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'deleted'))
-        } else {
-          setMessage(FAIL_MESSAGE);
         }
       }
     } catch (err) {
       console.log(err);
+      setMessage(FAIL_MESSAGE);
     }
   };
 
   useEffect(() => {
     handleFetch();
   }, []);
+
+  useEffect(() => {
+    if (message !== '') {
+      message === FAIL_MESSAGE ? toast.error(message) : toast.success(message);
+    }
+  }, [message]);
 
   const handleSubmit = () => {
     handleCreate();
@@ -130,7 +135,6 @@ export const VirtualBulletin = () => {
       </ReactModal>
       <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl gap-10 px-12 py-10 mb-12">
         <div className="col-span-4 min-h-screen">
-          <div className="py-4 font-bold">{message}</div>
           {userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.CLIENT &&
             <div className="mb-4 flex">
               <Button name="Create a Bulletin Post +" color="bg-light-blue" onClick={ () => setIsOpen(true) }/>
@@ -154,6 +158,9 @@ export const VirtualBulletin = () => {
               />
             )
           }
+        </div>
+        <div>
+          <ToastContainer position="bottom-center" style={{ width: "fit-content" }} />
         </div>
       </div>
     </>
