@@ -17,11 +17,11 @@ export const Card = ({
   accountType,
   id,
   onClick = () => '',
+  deleteOnClick = () => '',
 }: CardProps) =>
   tall
     ? (
       <div className='bg-light-blue rounded-xl px-6 py-4 min-w-card max-h-card w-full mb-4'>
-
         {bulletin && accountType === ACCOUNT_TYPES.EMPLOYEE ? (
           <div className='flex'>
             <div className='grow'>
@@ -33,6 +33,7 @@ export const Card = ({
               <Button
                 name="Delete"
                 color='bg-light-blue'
+                onClick={() => deleteOnClick(id)}
               />
             </div>
             <div className='grow-0'>
@@ -42,6 +43,7 @@ export const Card = ({
                     ? cardButtonTypes[typeIndex].disabled
                     : cardButtonTypes[typeIndex].enabled}
                 disabled={disabled}
+                onClick={() => onClick(id)}
               />
             </div>
           </div>

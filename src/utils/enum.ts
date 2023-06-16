@@ -12,6 +12,7 @@ export type CardProps = {
   bulletin?: boolean;
   accountType?: string;
   onClick?: any;
+  deleteOnClick?: any;
   id?: number;
 }
 
@@ -107,3 +108,6 @@ export type SelectOption = {
   label: string;
   value: string;
 };
+
+export const SUCCESS_MESSAGE = (name: string, action: string, submission?: boolean) => `Post ${name} has been ${action} successfully${(submission && ' and is awaiting approval') || ''}!`;
+export const FAIL_MESSAGE = 'Oh no! Something went wrong!';
