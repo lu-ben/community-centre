@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
-import { CardProps, ModalStyles, ACCOUNT_TYPES, API_BASE_URL, DATE_FORMATTER, SelectOption } from "../../utils/enum";
+import { CardProps, ModalStyles, ACCOUNT_TYPES, API_BASE_URL, DATE_FORMATTER, SelectOption, ANNOUNCEMENT_SUCCESS_MESSAGE, FAIL_MESSAGE } from "../../utils/enum";
 import { BarLoader } from "react-spinners";
 import ReactModal from "react-modal";
 import { Button } from "../../components/Button";
@@ -9,6 +9,7 @@ import { InputText } from "../../components/InputText";
 import { TextArea } from "../../components/TextArea";
 import { useUser } from "../../hooks/useUser";
 import { SelectMulti } from "../../components/SelectMulti";
+import { ToastContainer, toast } from "react-toastify";
 
 export const Announcement = () => {
   const userHook = useUser();
@@ -20,6 +21,7 @@ export const Announcement = () => {
   const [content, setContent] = useState('');
   const [selectedFacilities, setSelectedFacilities] = useState<SelectOption[]>();
   const [selectedEvents, setSelectedEvents] = useState<SelectOption[]>();
+  const [message, setMessage] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleFetch = async () => {
@@ -88,9 +90,11 @@ export const Announcement = () => {
       });
       if (res.status === 200) {
         await handleFetch();
+        setMessage(ANNOUNCEMENT_SUCCESS_MESSAGE(title));
       }
     } catch (err) {
       console.log(err);
+      setMessage(FAIL_MESSAGE);
     }
   };
 
@@ -119,6 +123,12 @@ export const Announcement = () => {
     handleFetch();
     handleFetchOptions();
   }, []);
+
+  useEffect(() => {
+    if (message !== '') {
+      message === FAIL_MESSAGE ? toast.error(message) : toast.success(message);
+    }
+  }, [message]);
 
   return (
     <>
@@ -166,6 +176,9 @@ export const Announcement = () => {
                 key={index}
               />)
           }
+        </div>
+        <div>
+          <ToastContainer position="bottom-center" style={{ width: "fit-content" }} />
         </div>
       </div>
     </>
