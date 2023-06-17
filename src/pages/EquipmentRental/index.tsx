@@ -7,7 +7,6 @@ import { BarLoader } from "react-spinners";
 import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
 import { InputText } from "../../components/InputText";
-import { SelectMulti } from "../../components/SelectMulti";
 
 export const EquipmentRental = () => {
   const [loading, setLoading] = useState(true);
@@ -16,13 +15,10 @@ export const EquipmentRental = () => {
 
   const [facilityName, setFacilityName] = useState('');
   const [equipmentName, setEquipmentName] = useState('');
-  const [facilityOptions, setFacilityOptions] = useState<SelectOption[]>([{label: 'All', value: 'All'}]);
+  const [facilityOptions, setFacilityOptions] = useState([]);
 
 
   const handleFetch = async () => {
-
-    console.log(facilityName);
-
     try {
       const res = await axios({
         baseURL: API_BASE_URL,
@@ -52,27 +48,13 @@ export const EquipmentRental = () => {
         headers: { 'Content-Type': null }
       });
       if (res.status === 200) {
-        console.log('getOptions called');
         if (res.data.facilityOptions) {
-          const fo: SelectOption[] = [];
-          res.data.facilityOptions.forEach((item: any) => {
-            fo.push({ label: item.facility_name, value: item.facility_name });
-          });
-          console.log(fo);
-          setFacilityOptions(fo);
+          setFacilityOptions(res.data.facilityOptions);
         }
       }
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const toStringArr = (arr: SelectOption[]) => {
-    const array: string[] = [];
-    arr.forEach((element: SelectOption) => {
-      array.push(element.value);
-    });
-    return array;
   };
 
   useEffect(() => {
@@ -87,8 +69,8 @@ export const EquipmentRental = () => {
         <div className="col-span-2" >
           <Select
             label="Select Facility"
-            options={toStringArr(facilityOptions)}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setFacilityName(e.target.value)}
+            options={facilityOptions}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFacilityName(e.target.value)}
           />
           <InputText label="Search" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEquipmentName(e.target.value)} />
           <div className="my-6 flex">
