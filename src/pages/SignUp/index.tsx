@@ -1,7 +1,7 @@
 import { InputText } from "../../components/InputText";
 import { Button } from "../../components/Button";
 import { Select } from "../../components/Select";
-import { EMPLOYEE_ROLES, ACCOUNT_TYPES } from "../../utils/enum";
+import { EMPLOYEE_ROLES, ACCOUNT_TYPES, FAIL_MESSAGE } from "../../utils/enum";
 import { useNavigate } from "react-router-dom";
 import { useSignUp } from "./useSignUp";
 import { ErrorText } from "../../components/ErrorText";
@@ -30,7 +30,7 @@ export const SignUp = () => {
         <div className="col-span-4">
           <div className="mt-4 grid grid-cols-2 h-14">
             <Button name="Sign-up" color="bg-light-blue" onClick={hook.hookHandleSubmit}/>
-            <Button name="Back" color="bg-white" onClick={() => navigate(-1)} />
+            <Button name="Back" color="bg-white" onClick={() => navigate('/')} />
           </div>
         </div>
       </div>
