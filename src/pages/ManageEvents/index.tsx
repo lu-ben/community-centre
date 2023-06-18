@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { SelectButton } from "../../components/SelectButton";
-import { API_BASE_URL, CardProps, DATE_FORMATTER, EVENT_PROP_VALUES, FAIL_MESSAGE, SUCCESS_MESSAGE } from "../../utils/enum";
+import { API_BASE_URL, DATE_FORMATTER, EVENT_PROP_VALUES } from "../../utils/enum";
 import { Card } from "../../components/Card";
 import { useUser } from "../../hooks/useUser";
 import axios from "axios";
@@ -36,11 +36,11 @@ export const ManageEvents = () => {
         baseURL: API_BASE_URL,
         method: 'get',
         url: '/event/stats',
-        params: { 
+        params: {
           age: selectedAge,
           type: selectedEventType
         },
-        headers: { 'Content-Type': null, cache: false }   
+        headers: { 'Content-Type': null, cache: false }
       });
       if (res.status === 200) {
         setAverageCount(res.data.eventStats.average);
@@ -58,7 +58,7 @@ export const ManageEvents = () => {
         baseURL: API_BASE_URL,
         method: 'get',
         url: '/event/clientStats',
-        headers: { 'Content-Type': null }   
+        headers: { 'Content-Type': null }
       });
       if (res.status === 200) {
         res.data.avgSignUpPerAgeGroup.forEach((item: { age_range: string, count: number}) => {
@@ -89,7 +89,7 @@ export const ManageEvents = () => {
         baseURL: API_BASE_URL,
         method: 'get',
         url: '/event/allUpcoming',
-        headers: { 'Content-Type': null, cache: false }   
+        headers: { 'Content-Type': null, cache: false }
       });
       if (res.status === 200) {
         setEventData(res.data.events);
@@ -119,11 +119,11 @@ export const ManageEvents = () => {
       console.log(err);
     }
   };
-  
+
   useEffect(() => {
     handleFetchStats();
   }, [selectedEventType, selectedAge]);
-  
+
   useEffect(() => {
     handleFetchClientStats();
     handleFetchEvents();
@@ -131,7 +131,7 @@ export const ManageEvents = () => {
 
   return (
     <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl gap-10 px-12 py-10 mb-12">
-      <div className="grid grid-cols-6 gap-10 min-h-screen"> 
+      <div className="grid grid-cols-6 gap-10 min-h-screen">
         <div className="col-span-2">
           <h2 className="text-left text-4xl font-bold mb-4">Event Statistics</h2>
           <div className="mb-4 flex gap-4">

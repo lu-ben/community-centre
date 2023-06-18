@@ -35,7 +35,7 @@ export const useSignUp = () => {
       });
       if (res.status === 200) {
         setError(false);
-        navigate('/');
+        navigate('/?signup=true');
       }
     } catch (err) {
       setError(true);

@@ -119,8 +119,11 @@ export type SelectOption = {
   value: string;
 };
 
-export const SUCCESS_MESSAGE = (name: string, action: string, submission?: boolean) => `Post ${name} has been ${action}${(submission && ' successfully and is awaiting approval') || ''}!`;
-export const FAIL_MESSAGE = 'Oh no, something went wrong! Please Try again!';
+export const POST_SUCCESS_MESSAGE = (name: string, action: string, submission?: boolean) => `Post ${name} has been ${action}${(submission && ' successfully and is awaiting approval') || ''}!`;
+export const REGISTRATION_SUCCESS_MESSAGE = (activity: string, date: string) => `Registration for ${activity} on ${date} was successful!`;
+export const ANNOUNCEMENT_SUCCESS_MESSAGE = (name: string) => `Success! Announcement for "${name}" has been created!`;
+export const SIGNUP_SUCCESS_MESSAGE = 'Your account has been created!';
+export const FAIL_MESSAGE = 'Oh no! Something went wrong! Please try again';
 
 export const EVENT_PROP_VALUES = {
   DROP_IN: 'drop-in',

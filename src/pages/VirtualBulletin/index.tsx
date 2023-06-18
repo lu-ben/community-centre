@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
-import { CardProps, ModalStyles, ACCOUNT_TYPES, API_BASE_URL, DATE_FORMATTER, SUCCESS_MESSAGE, FAIL_MESSAGE } from "../../utils/enum";
+import { CardProps, ModalStyles, ACCOUNT_TYPES, API_BASE_URL, DATE_FORMATTER, POST_SUCCESS_MESSAGE, FAIL_MESSAGE } from "../../utils/enum";
 import { BarLoader } from "react-spinners";
 import { useUser } from "../../hooks/useUser";
 import { Button } from "../../components/Button";
@@ -56,7 +56,7 @@ export const VirtualBulletin = () => {
       if (res.status === 200) {
         handleFetch();
         if (res.data.bulletin.post_id !== undefined) {
-          setSuccessMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'created', true));
+          setSuccessMessage(POST_SUCCESS_MESSAGE(res.data.bulletin.title, 'created', true));
         }
       }
     } catch (err) {
@@ -77,7 +77,7 @@ export const VirtualBulletin = () => {
       if (res.status === 200) {
         handleFetch();
         if (res.data.bulletin.post_id !== undefined) {
-          setSuccessMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'approved'));
+          setSuccessMessage(POST_SUCCESS_MESSAGE(res.data.bulletin.title, 'approved'));
         }
       }
     } catch (err) {
@@ -98,7 +98,7 @@ export const VirtualBulletin = () => {
       if (res.status === 200) {
         handleFetch();
         if (res.data.bulletin.post_id !== undefined) {
-          setSuccessMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'deleted'));
+          setSuccessMessage(POST_SUCCESS_MESSAGE(res.data.bulletin.title, 'deleted'));
         }
       }
     } catch (err) {
@@ -157,7 +157,7 @@ export const VirtualBulletin = () => {
           }
         </div>
         <div>
-          <Toast 
+          <Toast
             successMessage={successMessage}
             setSuccessMessage={setSuccessMessage}
             errorMessage={errorMessage}

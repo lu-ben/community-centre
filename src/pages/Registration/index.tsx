@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "../../components/Card";
-import { CardProps, ACCOUNT_TYPES, API_BASE_URL, DATE_FORMATTER } from "../../utils/enum";
+import { CardProps, ACCOUNT_TYPES, API_BASE_URL, DATE_FORMATTER, FAIL_MESSAGE, REGISTRATION_SUCCESS_MESSAGE } from "../../utils/enum";
 import { BarLoader } from "react-spinners";
 import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
 import { useUser } from "../../hooks/useUser";
 import { ErrorText } from "../../components/ErrorText";
+import { Toast } from "../../components/Toast";
 
 export const Registration = () => {
   const userHook = useUser();
@@ -15,10 +16,12 @@ export const Registration = () => {
 
   const [selectedType, setSelectedType] = useState('');
   const [selectedAgeRange, setSelectedAgeRange] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const [employeeError, setEmployeeError] = useState(false); 
+  const [employeeError, setEmployeeError] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  
+
   const handleFetch = async () => {
     try {
       setLoading(true);
@@ -26,13 +29,13 @@ export const Registration = () => {
         baseURL: API_BASE_URL,
         method: 'get',
         url: '/event',
-        params: { 
-          accountType: userHook.hookUserCookie.user?.accountType, 
+        params: {
+          accountType: userHook.hookUserCookie.user?.accountType,
           typeSpecificId: userHook.hookUserCookie.user?.typeSpecificId,
           selectedType,
           selectedAgeRange,
         },
-        headers: { 'Content-Type': null, cache: false }   
+        headers: { 'Content-Type': null, cache: false }
       });
       if (res.status === 200) {
         if (res.data.events) {
@@ -46,31 +49,33 @@ export const Registration = () => {
     }
   };
 
-  const handleRegister = async (id: number) => {
+  const handleRegister = async (id: number | undefined, title: string, date: string) => {
     if (userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.EMPLOYEE) {
       setEmployeeError(true);
-      return; 
+      return;
     }
     try {
       const res = await axios({
         baseURL: API_BASE_URL,
         method: 'post',
         url: '/event/register',
-        params: { 
+        params: {
           eventId: id,
           typeSpecificId: userHook.hookUserCookie.user?.typeSpecificId,
         },
-        headers: { 'Content-Type': null }   
+        headers: { 'Content-Type': null }
       });
       if (res.status === 200) {
         await handleFetch();
+        setSuccessMessage(REGISTRATION_SUCCESS_MESSAGE(title, DATE_FORMATTER(date)))
       }
     } catch (err) {
       console.log(err);
+      setErrorMessage(FAIL_MESSAGE);
     }
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     handleFetch();
   }, []);
 
@@ -102,10 +107,18 @@ export const Registration = () => {
                 typeIndex={0}
                 age={item.age}
                 type={item.type}
-                onClick={handleRegister}
+                onClick={() => handleRegister(item.id, item.title, item.date)}
                 id={item.id}
               />)
           }
+        </div>
+        <div>
+          <Toast
+            successMessage={successMessage}
+            setSuccessMessage={setSuccessMessage}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
         </div>
       </div>
     </>
