@@ -10,8 +10,6 @@ export const SignUp = () => {
   const hook = useSignUp();
   const navigate = useNavigate();
 
-  // TODO: [optional]: add a 'role' field that only shows up (or replaces the age field) when selecting employee
-  //                   currently backend just defaults role to 'manager'
   return (
     <div className="w-full grid">
       <p className="text-6xl font-bold text-white">User sign-up</p>

@@ -75,8 +75,6 @@ export const PastEvents = () => {
     handleFetch();
   }, [selectedColumns]);
 
-  // FOR EMPLOYEES this will be a page of all the events they instructed
-
   return (
     <>
       <ReactModal style={ModalStyles} isOpen={isOpen} >
@@ -90,36 +88,29 @@ export const PastEvents = () => {
           <Select label="Date" onChange={undefined} />
         </div>
       </ReactModal>
-      <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl gap-10 px-12 py-10 mb-12">
-        <div className="min-h-screen">
-          <div className="mb-10 flex gap-2">
-            <span className="py-2 mr-4">Select the fields to display:</span>
-            <SelectButton name="Title" selected disabled onClick={() => ''}/>
-            <SelectButton name="Event Type" selected={typeSelected} onClick={() => handleColumnSelect('event_type')}/>
-            <SelectButton name="Age Range" selected={ageSelected} onClick={() => handleColumnSelect('age_range')}/>
-            <SelectButton name="Location" selected={locationSelected} onClick={() => handleColumnSelect('facility_name')}/>
-            <SelectButton name="Date" selected={dateSelected} onClick={() => handleColumnSelect('date')}/>
-          </div>
-          {/* {userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.CLIENT &&
-            <div className="mb-2 flex">
-              <Button name="Record an unscheduled drop-in +" color="bg-light-blue" rounded='rounded-3xl' onClick={ () => setIsOpen(true) }/>
-            </div>
-          } */}
-          {loading ?
-            <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
-            historyData?.map((item: RowProps, index: number) =>
-              <Row
-                title={item?.title}
-                date={item?.date ? DATE_FORMATTER(item.date || '') : undefined}
-                facility_name={item?.facility_name || undefined}
-                event_type={item.event_type?.toUpperCase() || undefined}
-                age_range={item.age_range?.toUpperCase() || undefined}
-                first={index === 0}
-                last={index === (historyData.length - 1)}
-                key={index}
-              />)
-          }
+      <div className="min-h-screen min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl gap-10 px-12 py-10 mb-12">
+        <div className="mb-10 flex gap-2">
+          <span className="py-2 mr-4">Select the fields to display:</span>
+          <SelectButton name="Title" selected disabled onClick={() => ''}/>
+          <SelectButton name="Event Type" selected={typeSelected} onClick={() => handleColumnSelect('event_type')}/>
+          <SelectButton name="Age Range" selected={ageSelected} onClick={() => handleColumnSelect('age_range')}/>
+          <SelectButton name="Location" selected={locationSelected} onClick={() => handleColumnSelect('facility_name')}/>
+          <SelectButton name="Date" selected={dateSelected} onClick={() => handleColumnSelect('date')}/>
         </div>
+        {loading ?
+          <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
+          historyData?.map((item: RowProps, index: number) =>
+            <Row
+              title={item?.title}
+              date={item?.date ? DATE_FORMATTER(item.date || '') : undefined}
+              facility_name={item?.facility_name || undefined}
+              event_type={item.event_type?.toUpperCase() || undefined}
+              age_range={item.age_range?.toUpperCase() || undefined}
+              first={index === 0}
+              last={index === (historyData.length - 1)}
+              key={index}
+            />)
+        }
       </div>
     </>
   );

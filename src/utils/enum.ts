@@ -9,11 +9,13 @@ export type CardProps = {
   age?: string;
   type?: string;
   tags?: string[];
-  bulletin?: boolean;
+  hasEmployeeButtons?: boolean;
   accountType?: string;
   onClick?: any;
   deleteOnClick?: any;
   id?: number;
+  customButtonText?: string;
+  buttonMinWidth?: string;
 }
 
 export type RowProps = {
@@ -36,6 +38,7 @@ export const paths = {
   announcement: '/announcement',
   logout: '/logout',
   history: '/history',
+  manage: '/manage',
 };
 
 // typeIndex === 0 is for events
@@ -53,7 +56,7 @@ export const cardButtonTypes = [
   {
     enabled: 'Approve',
     disabled: 'Approved',
-  }
+  },
 ];
 
 export const ACCOUNT_TYPES = {
@@ -90,7 +93,14 @@ export const HEADER_TEXT: { [key: string]: string }= {
   ['/rental']: 'Borrow your favourite equipment',
   ['/announcement']: 'The lastest news about your facility',
   ['/bulletin']: 'Connect with the local community',
-  ['/history']: 'View & edit your event history',
+  ['/history']: 'View your event history',
+  ['/manage']: 'Create or edit events',
+};
+
+export const HEADER_TEXT_EMPLOYEE: { [key: string]: string }= {
+  ['/announcement']: 'View & create facility announcements',
+  ['/bulletin']: 'Manage the virtual bulletin board',
+  ['/manage']: 'Manage events & view statistics',
 };
 
 export const API_BASE_URL = 'http://127.0.0.1:9090';
@@ -110,4 +120,12 @@ export type SelectOption = {
 };
 
 export const SUCCESS_MESSAGE = (name: string, action: string, submission?: boolean) => `Post ${name} has been ${action}${(submission && ' successfully and is awaiting approval') || ''}!`;
-export const FAIL_MESSAGE = 'Oh no! Something went wrong!';
+export const FAIL_MESSAGE = 'Oh no, something went wrong! Please Try again!';
+
+export const EVENT_PROP_VALUES = {
+  DROP_IN: 'drop-in',
+  PROGRAM: 'program',
+  CHILD: 'child',
+  YOUTH: 'youth',
+  ADULT: 'adult',
+};

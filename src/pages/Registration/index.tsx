@@ -74,7 +74,6 @@ export const Registration = () => {
     handleFetch();
   }, []);
 
-  // TODO: [optional] connection for create events for employees
   return (
     <>
       <div className="min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl grid grid-cols-6 gap-10 px-12 py-10 mb-12">

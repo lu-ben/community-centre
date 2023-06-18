@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { CardProps, ModalStyles, ACCOUNT_TYPES, API_BASE_URL, DATE_FORMATTER, SUCCESS_MESSAGE, FAIL_MESSAGE } from "../../utils/enum";
 import { BarLoader } from "react-spinners";
@@ -7,9 +8,7 @@ import { Button } from "../../components/Button";
 import ReactModal from "react-modal";
 import { InputText } from "../../components/InputText";
 import { TextArea } from "../../components/TextArea";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { Toast } from "../../components/Toast";
 
 export const VirtualBulletin = () => {
   const userHook = useUser();
@@ -17,8 +16,11 @@ export const VirtualBulletin = () => {
   const [bulletinData, setBulletinData] = useState<CardProps[]>([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [message, setMessage] = useState('');
+
+  // Modal & Toast States
   const [isOpen, setIsOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleFetch = async () => {
     try {
@@ -54,16 +56,16 @@ export const VirtualBulletin = () => {
       if (res.status === 200) {
         handleFetch();
         if (res.data.bulletin.post_id !== undefined) {
-          setMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'created', true))
+          setSuccessMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'created', true));
         }
       }
     } catch (err) {
       console.log(err);
-      setMessage(FAIL_MESSAGE);
+      setErrorMessage(FAIL_MESSAGE);
     }
   };
 
-  const handleApprove = async (id: Number) => {
+  const handleApprove = async (id: number) => {
     try {
       const res = await axios({
         baseURL: API_BASE_URL,
@@ -75,16 +77,16 @@ export const VirtualBulletin = () => {
       if (res.status === 200) {
         handleFetch();
         if (res.data.bulletin.post_id !== undefined) {
-          setMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'approved'))
+          setSuccessMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'approved'));
         }
       }
     } catch (err) {
       console.log(err);
-      setMessage(FAIL_MESSAGE);
+      setErrorMessage(FAIL_MESSAGE);
     }
   };
 
-  const handleDelete = async (id: Number) => {
+  const handleDelete = async (id: number) => {
     try {
       const res = await axios({
         baseURL: API_BASE_URL,
@@ -96,29 +98,23 @@ export const VirtualBulletin = () => {
       if (res.status === 200) {
         handleFetch();
         if (res.data.bulletin.post_id !== undefined) {
-          setMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'deleted'))
+          setSuccessMessage(SUCCESS_MESSAGE(res.data.bulletin.title, 'deleted'));
         }
       }
     } catch (err) {
       console.log(err);
-      setMessage(FAIL_MESSAGE);
+      setErrorMessage(FAIL_MESSAGE);
     }
   };
-
-  useEffect(() => {
-    handleFetch();
-  }, []);
-
-  useEffect(() => {
-    if (message !== '') {
-      message === FAIL_MESSAGE ? toast.error(message) : toast.success(message);
-    }
-  }, [message]);
 
   const handleSubmit = () => {
     handleCreate();
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    handleFetch();
+  }, []);
 
   return (
     <>
@@ -152,15 +148,21 @@ export const VirtualBulletin = () => {
                 typeIndex={2}
                 onClick={handleApprove}
                 deleteOnClick={handleDelete}
-                bulletin
+                hasEmployeeButtons
                 accountType={userHook.hookUserCookie.user.accountType}
                 id={item.id}
+                buttonMinWidth="min-w-button-m"
               />
             )
           }
         </div>
         <div>
-          <ToastContainer position="bottom-center" style={{ width: "fit-content" }} />
+          <Toast 
+            successMessage={successMessage}
+            setSuccessMessage={setSuccessMessage}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
         </div>
       </div>
     </>
