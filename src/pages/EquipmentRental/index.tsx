@@ -73,7 +73,7 @@ export const EquipmentRental = () => {
         },
       });
       if (res.status === 200) {
-        console.log('equipment rented');
+        handleFetch();
       }
     } catch (err) {
       console.log(err);
