@@ -10,6 +10,7 @@ import { paths } from './utils/enum';
 import { Announcement } from './pages/Announcement';
 import { VirtualBulletin } from './pages/VirtualBulletin';
 import { PastEvents } from './pages/PastEvents';
+import { ManageEvents } from './pages/ManageEvents';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path={paths.announcement} element={<Announcement />} />
         <Route path={paths.bulletin} element={<VirtualBulletin />} />
         <Route path={paths.history} element={<PastEvents />} />
+        <Route path={paths.manage} element={<ManageEvents />} />
       </Routes>
     </div>
   );

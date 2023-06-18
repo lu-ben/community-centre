@@ -13,16 +13,18 @@ export const Card = ({
   age,
   type,
   tags,
-  bulletin = false,
+  hasEmployeeButtons = false,
   accountType,
   id,
   onClick = () => '',
   deleteOnClick = () => '',
+  customButtonText,
+  buttonMinWidth,
 }: CardProps) =>
   tall
     ? (
       <div className='bg-light-blue rounded-xl px-6 py-4 min-w-card max-h-card w-full mb-4'>
-        {bulletin && accountType === ACCOUNT_TYPES.EMPLOYEE ? (
+        {hasEmployeeButtons && accountType === ACCOUNT_TYPES.EMPLOYEE ? (
           <div className='flex'>
             <div className='grow'>
               <h3 className='text-2xl text-left font-bold'>{title}</h3>
@@ -38,12 +40,13 @@ export const Card = ({
             </div>
             <div className='grow-0'>
               <Button
-                name={
-                  disabled
+                name={customButtonText || 
+                  (disabled
                     ? cardButtonTypes[typeIndex].disabled
-                    : cardButtonTypes[typeIndex].enabled}
+                    : cardButtonTypes[typeIndex].enabled)}
                 disabled={disabled}
                 onClick={() => onClick(id)}
+                minWidth={buttonMinWidth}
               />
             </div>
           </div>
@@ -58,6 +61,10 @@ export const Card = ({
           )
         }
         { <div className="flex gap-1 mt-2">{tags && tags.map((item: string, index: number) => <Tag label={item} key={index}/>)}</div>}
+        {age && type && (
+          <div className='mt-2'>
+            <p className='text-xs text-left'>{type.toUpperCase()} | {age === 'all' ? `${age.toUpperCase()} AGES` : age.toUpperCase()}</p>
+          </div>)}
         { content && <p className="pt-6 pb-2 text-xs text-left">{content}</p> }
       </div>
     ) : (

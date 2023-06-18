@@ -12,11 +12,14 @@ export default {
       minWidth: {
         'screen-md-2': '980px',
         'card': '200px',
+        'button': '80px',
+        'button-m': '120px',
       },
       maxWidth: {
         'screen-md-2': '980px',
       },
       minHeight: {
+        'toast': '0',
         'announcement': '100px',
       },
       maxHeight: {
@@ -27,8 +30,8 @@ export default {
       },
       colors: {
         'red': '#E56363',
-        'turqoise': '#B9FFE4',
-        'turqoise-inactive': '#97CEB8',
+        'turquoise': '#B9FFE4',
+        'turquoise-inactive': '#97CEB8',
         'light-blue': '#E0E3EF',
         'medium-blue': '#5A617C',
         'dark-blue': '#343B53',
