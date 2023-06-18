@@ -7,7 +7,7 @@ import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
 import { useUser } from "../../hooks/useUser";
 import { ErrorText } from "../../components/ErrorText";
-import { ToastContainer, toast } from "react-toastify";
+import { Toast } from "../../components/Toast";
 
 export const Registration = () => {
   const userHook = useUser();
@@ -16,7 +16,8 @@ export const Registration = () => {
 
   const [selectedType, setSelectedType] = useState('');
   const [selectedAgeRange, setSelectedAgeRange] = useState('');
-  const [message, setMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [employeeError, setEmployeeError] = useState(false);
   const [noResults, setNoResults] = useState(false);
@@ -66,23 +67,17 @@ export const Registration = () => {
       });
       if (res.status === 200) {
         await handleFetch();
-        setMessage(REGISTRATION_SUCCESS_MESSAGE(title, DATE_FORMATTER(date)))
+        setSuccessMessage(REGISTRATION_SUCCESS_MESSAGE(title, DATE_FORMATTER(date)))
       }
     } catch (err) {
       console.log(err);
-      setMessage(FAIL_MESSAGE);
+      setErrorMessage(FAIL_MESSAGE);
     }
   };
 
   useEffect(() => {
     handleFetch();
   }, []);
-
-  useEffect(() => {
-    if (message !== '') {
-      message === FAIL_MESSAGE ? toast.error(message) : toast.success(message);
-    }
-  }, [message]);
 
   return (
     <>
@@ -118,7 +113,12 @@ export const Registration = () => {
           }
         </div>
         <div>
-          <ToastContainer position="bottom-center" style={{ width: "fit-content", minWidth: "50%" }} />
+          <Toast
+            successMessage={successMessage}
+            setSuccessMessage={setSuccessMessage}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
         </div>
       </div>
     </>

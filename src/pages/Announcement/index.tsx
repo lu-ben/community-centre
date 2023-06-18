@@ -9,7 +9,7 @@ import { InputText } from "../../components/InputText";
 import { TextArea } from "../../components/TextArea";
 import { useUser } from "../../hooks/useUser";
 import { SelectMulti } from "../../components/SelectMulti";
-import { ToastContainer, toast } from "react-toastify";
+import { Toast } from "../../components/Toast";
 
 export const Announcement = () => {
   const userHook = useUser();
@@ -21,7 +21,8 @@ export const Announcement = () => {
   const [content, setContent] = useState('');
   const [selectedFacilities, setSelectedFacilities] = useState<SelectOption[]>();
   const [selectedEvents, setSelectedEvents] = useState<SelectOption[]>();
-  const [message, setMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleFetch = async () => {
@@ -90,11 +91,11 @@ export const Announcement = () => {
       });
       if (res.status === 200) {
         await handleFetch();
-        setMessage(ANNOUNCEMENT_SUCCESS_MESSAGE(title));
+        setSuccessMessage(ANNOUNCEMENT_SUCCESS_MESSAGE(title));
       }
     } catch (err) {
       console.log(err);
-      setMessage(FAIL_MESSAGE);
+      setErrorMessage(FAIL_MESSAGE);
     }
   };
 
@@ -123,12 +124,6 @@ export const Announcement = () => {
     handleFetch();
     handleFetchOptions();
   }, []);
-
-  useEffect(() => {
-    if (message !== '') {
-      message === FAIL_MESSAGE ? toast.error(message) : toast.success(message);
-    }
-  }, [message]);
 
   return (
     <>
@@ -178,7 +173,12 @@ export const Announcement = () => {
           }
         </div>
         <div>
-          <ToastContainer position="bottom-center" style={{ width: "fit-content" }} />
+          <Toast
+            successMessage={successMessage}
+            errorMessage={errorMessage}
+            setSuccessMessage={setSuccessMessage}
+            setErrorMessage={setErrorMessage}
+          />
         </div>
       </div>
     </>
