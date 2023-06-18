@@ -7,8 +7,10 @@ import { BarLoader } from "react-spinners";
 import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
 import { InputText } from "../../components/InputText";
+import { useUser } from "../../hooks/useUser";
 
 export const EquipmentRental = () => {
+  const userHook = useUser();
   const [loading, setLoading] = useState(true);
   // const [rentalData, setRentalData] = useState<CardProps[]>(fakeRentalData);
   const [rentalData, setRentalData] = useState<CardProps[]>();
@@ -57,6 +59,27 @@ export const EquipmentRental = () => {
     }
   };
 
+  const handleRental = async (equipment_id: any) => {
+    try {
+      const client_id = userHook.hookUserCookie.user?.typeSpecificId;
+      const equip_id = equipment_id;
+      const res = await axios({
+        baseURL: API_BASE_URL,
+        method: 'post',
+        url: '/rental/rentEquipment',
+        params: {
+          client_id: client_id,
+          equipment_id: equip_id
+        },
+      });
+      if (res.status === 200) {
+        console.log('equipment rented');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     // setTimeout(()=> setLoading(false), 1000);
     handleFetch();
@@ -83,12 +106,13 @@ export const EquipmentRental = () => {
             rentalData.map((item: CardProps) =>
               <Card
                 title={item.title}
-                date={item.date}
+                date={'Equipment ID: ' + item.date}
                 subtitle={item.subtitle}
                 tall={false}
                 content={item.content}
                 disabled={item.disabled}
                 typeIndex={1}
+                onClick={() => handleRental(item.date)}
               />)
           }
         </div>
