@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { ModalStyles, RowProps, ACCOUNT_TYPES, API_BASE_URL, DATE_FORMATTER } from "../../utils/enum";
-import { fakeHistoryData } from './fakeData';
 import { BarLoader } from "react-spinners";
 import ReactModal from "react-modal";
 import { Button } from "../../components/Button";
@@ -14,7 +13,6 @@ export const PastEvents = () => {
   const userHook = useUser();
   const [loading, setLoading] = useState(true);
   const [historyData, setHistoryData] = useState<RowProps[]>();
-  const [isOpen, setIsOpen] = useState(false);
   
   const [ageSelected, setAgeSelected] = useState(false);
   const [dateSelected, setDateSelected] = useState(true);
@@ -77,17 +75,6 @@ export const PastEvents = () => {
 
   return (
     <>
-      <ReactModal style={ModalStyles} isOpen={isOpen} >
-        <div className="px-8 py-4">
-          <div className="flex mb-4">
-            <h3 className='text-3xl text-left font-bold grow'>New Event Record</h3>
-            <Button name="Cancel" color="bg-white" onClick={() => setIsOpen(false)}/>
-            <Button name="Add" onClick={() => setIsOpen(false)}/>
-          </div>
-          <Select label="Unscheduled Drop-in Type" onChange={undefined} options={['Gym', 'Swimming Pool']}/>
-          <Select label="Date" onChange={undefined} />
-        </div>
-      </ReactModal>
       <div className="min-h-screen min-w-screen-md-2 max-w-screen-md-2 bg-white rounded-xl gap-10 px-12 py-10 mb-12">
         <div className="mb-10 flex gap-2">
           <span className="py-2 mr-4">Select the fields to display:</span>

@@ -67,7 +67,7 @@ export const Registration = () => {
       });
       if (res.status === 200) {
         await handleFetch();
-        setSuccessMessage(REGISTRATION_SUCCESS_MESSAGE(title, DATE_FORMATTER(date)))
+        setSuccessMessage(REGISTRATION_SUCCESS_MESSAGE(title, DATE_FORMATTER(date)));
       }
     } catch (err) {
       console.log(err);
@@ -96,7 +96,7 @@ export const Registration = () => {
           {userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.EMPLOYEE && <div className="my-4 flex"><Button name="Add Events +" color="text-dark-blue"/></div>}
           {loading ?
             <BarLoader className="mx-auto my-8" loading color='#343B53'/> :
-            eventData?.map((item: CardProps) =>
+            eventData?.map((item: CardProps, index: number) =>
               <Card
                 title={item.title}
                 date={DATE_FORMATTER(item.date)}
@@ -109,6 +109,7 @@ export const Registration = () => {
                 type={item.type}
                 onClick={() => handleRegister(item.id, item.title, item.date)}
                 id={item.id}
+                key={index}
               />)
           }
         </div>

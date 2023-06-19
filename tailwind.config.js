@@ -33,6 +33,7 @@ export default {
         'turquoise': '#B9FFE4',
         'turquoise-inactive': '#97CEB8',
         'light-blue': '#E0E3EF',
+        'medium-light-blue': '#ABB1C7',
         'medium-blue': '#5A617C',
         'dark-blue': '#343B53',
       }
