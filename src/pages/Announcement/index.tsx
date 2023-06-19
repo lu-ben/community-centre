@@ -122,7 +122,7 @@ export const Announcement = () => {
 
   useEffect(() => {
     handleFetch();
-    handleFetchOptions();
+    if (userHook.hookUserCookie.user?.accountType === ACCOUNT_TYPES.EMPLOYEE) handleFetchOptions();
   }, []);
 
   return (

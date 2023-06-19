@@ -31,6 +31,7 @@ export const Header = () => {
         <HeaderButton name="Virtual Bulletin Board" selected={pathname === paths.bulletin} path={paths.bulletin}></HeaderButton>
         {accountType === ACCOUNT_TYPES.CLIENT && <HeaderButton name="Equipment Rental" selected={pathname === paths.rental} path={paths.rental}></HeaderButton>}
         {accountType === ACCOUNT_TYPES.CLIENT && <HeaderButton name="Past Events" selected={pathname === paths.history} path={paths.history}></HeaderButton>}
+        {accountType === ACCOUNT_TYPES.EMPLOYEE && <HeaderButton name="Manage Accounts" selected={pathname === paths.account} path={paths.account}></HeaderButton>}
       </div>
     </div>
   );

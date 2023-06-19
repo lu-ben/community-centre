@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "../../components/Card";
-import { API_BASE_URL, CardProps, SelectOption } from "../../utils/enum";
-// import { fakeRentalData } from './fakeData';
+import { API_BASE_URL, CardProps, EQUIPMENT_SUCCESS_MESSAGE, FAIL_MESSAGE } from "../../utils/enum";
 import { BarLoader } from "react-spinners";
 import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
 import { InputText } from "../../components/InputText";
 import { useUser } from "../../hooks/useUser";
+import { ErrorText } from "../../components/ErrorText";
+import { Toast } from "../../components/Toast";
 
 export const EquipmentRental = () => {
   const userHook = useUser();
   const [loading, setLoading] = useState(true);
-  // const [rentalData, setRentalData] = useState<CardProps[]>(fakeRentalData);
-  const [rentalData, setRentalData] = useState<CardProps[]>();
+  const [rentalData, setRentalData] = useState<CardProps[]>([]);
 
-  const [facilityName, setFacilityName] = useState('');
+  const [facilityName, setFacilityName] = useState('All');
   const [equipmentName, setEquipmentName] = useState('');
-  const [facilityOptions, setFacilityOptions] = useState([]);
+  const [facilityOptions, setFacilityOptions] = useState<string[]>([]);
 
+  const [noResults, setNoResults] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleFetch = async () => {
     try {
@@ -34,10 +37,12 @@ export const EquipmentRental = () => {
       });
       if (res.status === 200) {
         if (res.data.equipment) setRentalData(res.data.equipment);
+        setNoResults(res.data.equipment.length <= 0);
         setLoading(false);
       }
     } catch (err) {
       console.log(err);
+      setNoResults(true);
     }
   };
 
@@ -51,7 +56,7 @@ export const EquipmentRental = () => {
       });
       if (res.status === 200) {
         if (res.data.facilityOptions) {
-          setFacilityOptions(res.data.facilityOptions);
+          setFacilityOptions(['All', ...res.data.facilityOptions]);
         }
       }
     } catch (err) {
@@ -59,29 +64,29 @@ export const EquipmentRental = () => {
     }
   };
 
-  const handleRental = async (equipment_id: any) => {
+  const handleRental = async (equipment_id?: number) => {
     try {
-      const client_id = userHook.hookUserCookie.user?.typeSpecificId;
-      const equip_id = equipment_id;
+      if (!equipment_id) return;
       const res = await axios({
         baseURL: API_BASE_URL,
         method: 'post',
         url: '/rental/rentEquipment',
         params: {
-          client_id: client_id,
-          equipment_id: equip_id
+          client_id: userHook.hookUserCookie.user?.typeSpecificId,
+          equipment_id,
         },
       });
       if (res.status === 200) {
+        setSuccessMessage(EQUIPMENT_SUCCESS_MESSAGE(res.data.id, res.data.name));
         handleFetch();
       }
     } catch (err) {
       console.log(err);
+      setErrorMessage(FAIL_MESSAGE);
     }
   };
 
   useEffect(() => {
-    // setTimeout(()=> setLoading(false), 1000);
     handleFetch();
     handleFetchOptions();
   }, []);
@@ -103,19 +108,31 @@ export const EquipmentRental = () => {
         <div className="col-span-4 min-h-screen">
           {loading ?
             <BarLoader className="mx-auto my-8" loading color='#343B53' /> :
-            rentalData.map((item: CardProps) =>
-              <Card
-                title={item.title}
-                date={'Equipment ID: ' + item.date}
-                subtitle={item.subtitle}
-                tall={false}
-                content={item.content}
-                disabled={item.disabled}
-                typeIndex={1}
-                onClick={() => handleRental(item.date)}
-              />)
+            <>
+              {noResults && <ErrorText color='dark-blue' message={"No records found."} />}
+              {rentalData?.map((item: CardProps, index: number) =>
+                <Card
+                  title={item.title}
+                  date={'Equipment ID: ' + item.id}
+                  subtitle={item.subtitle}
+                  tall={false}
+                  content={item.content}
+                  disabled={item.disabled}
+                  typeIndex={1}
+                  onClick={() => handleRental(item?.id)}
+                  key={index}
+                />)}
+            </>
           }
         </div>
+      </div>
+      <div>
+        <Toast
+          successMessage={successMessage}
+          errorMessage={errorMessage}
+          setSuccessMessage={setSuccessMessage}
+          setErrorMessage={setErrorMessage}
+        />
       </div>
     </>
   );

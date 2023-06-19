@@ -11,6 +11,7 @@ import { Announcement } from './pages/Announcement';
 import { VirtualBulletin } from './pages/VirtualBulletin';
 import { PastEvents } from './pages/PastEvents';
 import { ManageEvents } from './pages/ManageEvents';
+import { ManageAccounts } from './pages/MangeAccounts';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path={paths.bulletin} element={<VirtualBulletin />} />
         <Route path={paths.history} element={<PastEvents />} />
         <Route path={paths.manage} element={<ManageEvents />} />
+        <Route path={paths.account} element={<ManageAccounts />} />
       </Routes>
     </div>
   );

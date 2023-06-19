@@ -26,6 +26,17 @@ export type RowProps = {
   age_range?: string;
   first?: boolean;
   last?: boolean;
+  first_name?: string;
+  last_name?: string;
+  username?: string;
+  role?: string;
+  age?: number;
+  account_type?: string;
+  numColumns?: number;
+  textSize?: string;
+  button?: boolean;
+  buttonOnChange?: any;
+  tall?: boolean;
 }
 
 export const paths = {
@@ -39,6 +50,7 @@ export const paths = {
   logout: '/logout',
   history: '/history',
   manage: '/manage',
+  account: 'account',
 };
 
 // typeIndex === 0 is for events
@@ -101,6 +113,7 @@ export const HEADER_TEXT_EMPLOYEE: { [key: string]: string }= {
   ['/announcement']: 'View & create facility announcements',
   ['/bulletin']: 'Manage the virtual bulletin board',
   ['/manage']: 'Manage events & view statistics',
+  ['/account']: 'View all user accounts',
 };
 
 export const API_BASE_URL = 'http://127.0.0.1:9090';
@@ -122,6 +135,7 @@ export type SelectOption = {
 export const POST_SUCCESS_MESSAGE = (name: string, action: string, submission?: boolean) => `Post "${name}" has been ${action}${(submission && ' successfully and is awaiting approval') || ''}!`;
 export const REGISTRATION_SUCCESS_MESSAGE = (activity: string, date: string) => `Registration for ${activity} on ${date} was successful!`;
 export const ANNOUNCEMENT_SUCCESS_MESSAGE = (name: string) => `Success! Announcement "${name}" has been created!`;
+export const EQUIPMENT_SUCCESS_MESSAGE = (id: number, name: string) => `Success! "${id} - ${name}" has been reserved!`;
 export const EVENT_SUCCESS_MESSAGE = (name: string) => `Event "${name}" has been deleted!`;
 export const SIGNUP_SUCCESS_MESSAGE = 'Your account has been created!';
 export const FAIL_MESSAGE = 'Oh no! Something went wrong! Please try again';
