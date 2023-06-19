@@ -40,7 +40,7 @@ export const Card = ({
             </div>
             <div className='grow-0'>
               <Button
-                name={customButtonText || 
+                name={customButtonText ||
                   (disabled
                     ? cardButtonTypes[typeIndex].disabled
                     : cardButtonTypes[typeIndex].enabled)}
@@ -60,12 +60,12 @@ export const Card = ({
             </>
           )
         }
-        { <div className="flex gap-1 mt-2">{tags && tags.map((item: string, index: number) => <Tag label={item} key={index}/>)}</div>}
+        {tags && <div className="flex gap-1 mt-2">{tags.map((item: string, index: number) => <Tag label={item} key={index}/>)}</div>}
         {age && type && (
           <div className='mt-2'>
             <p className='text-xs text-left'>{type.toUpperCase()} | {age === 'all' ? `${age.toUpperCase()} AGES` : age.toUpperCase()}</p>
           </div>)}
-        { content && <p className="pt-6 pb-2 text-xs text-left">{content}</p> }
+        { content && <p className="pt-4 pb-2 text-xs text-left">{content}</p> }
       </div>
     ) : (
       <div className='bg-light-blue rounded-xl px-6 py-4 min-w-card max-h-card w-full mb-4 grid grid-cols-5'>
