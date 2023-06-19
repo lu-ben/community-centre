@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { SelectButton } from "../../components/SelectButton";
-import { API_BASE_URL, DATE_FORMATTER, EVENT_PROP_VALUES } from "../../utils/enum";
+import { API_BASE_URL, DATE_FORMATTER, EVENT_PROP_VALUES, EVENT_SUCCESS_MESSAGE, FAIL_MESSAGE } from "../../utils/enum";
 import { Card } from "../../components/Card";
 import { useUser } from "../../hooks/useUser";
 import axios from "axios";
+import { Toast } from "../../components/Toast";
 
 export const ManageEvents = () => {
   const userHook = useUser();
   const [eventData, setEventData] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Event Stats States
   const [selectedEventType, setSelectedEventType] = useState(EVENT_PROP_VALUES.DROP_IN);
@@ -99,7 +102,7 @@ export const ManageEvents = () => {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: number, name: string) => {
     try {
       const res = await axios({
         baseURL: API_BASE_URL,
@@ -113,10 +116,12 @@ export const ManageEvents = () => {
           handleFetchEvents();
           handleFetchClientStats();
           handleFetchStats();
+          setSuccessMessage(EVENT_SUCCESS_MESSAGE(name));
         }
       }
     } catch (err) {
       console.log(err);
+      setErrorMessage(FAIL_MESSAGE);
     }
   };
 
@@ -175,7 +180,7 @@ export const ManageEvents = () => {
               disabled={item.is_full}
               typeIndex={0}
               onClick={() => ''}
-              deleteOnClick={handleDelete}
+              deleteOnClick={() => handleDelete(item.id, item.title)}
               hasEmployeeButtons
               customButtonText={item.is_full ? 'Full' : `${item.sign_up_count}/${item.capacity}`}
               accountType={userHook.hookUserCookie.user.accountType}
@@ -187,6 +192,14 @@ export const ManageEvents = () => {
             />)}
         </div>
       </div>
+      <div>
+          <Toast
+            successMessage={successMessage}
+            setSuccessMessage={setSuccessMessage}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
+        </div>
     </div>
   );
 };
