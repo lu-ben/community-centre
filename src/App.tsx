@@ -11,7 +11,7 @@ import { Announcement } from './pages/Announcement';
 import { VirtualBulletin } from './pages/VirtualBulletin';
 import { PastEvents } from './pages/PastEvents';
 import { ManageEvents } from './pages/ManageEvents';
-import { ManageAccounts } from './pages/MangeAccounts';
+import { ManageAccounts } from './pages/ManageAccounts';
 
 
 function App() {

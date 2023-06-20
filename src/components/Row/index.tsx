@@ -1,14 +1,14 @@
 import { RowProps } from "../../utils/enum";
 
 export const Row = (
-  { 
+  {
     title,
     date,
     facility_name,
     event_type,
     age_range,
     first = false,
-    last = false, 
+    last = false,
     first_name,
     last_name,
     username,
