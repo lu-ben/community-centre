@@ -137,6 +137,7 @@ export const REGISTRATION_SUCCESS_MESSAGE = (activity: string, date: string) => 
 export const ANNOUNCEMENT_SUCCESS_MESSAGE = (name: string) => `Success! Announcement "${name}" has been created!`;
 export const EQUIPMENT_SUCCESS_MESSAGE = (id: number, name: string) => `Success! "${id} - ${name}" has been reserved!`;
 export const EVENT_SUCCESS_MESSAGE = (name: string) => `Event "${name}" has been deleted!`;
+export const USER_UPDATE_SUCCESS_MESSAGE = (username: string) => `Successfully updated user ${username}!`;
 export const SIGNUP_SUCCESS_MESSAGE = 'Your account has been created!';
 export const FAIL_MESSAGE = 'Oh no! Something went wrong! Please try again';
 
