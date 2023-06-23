@@ -14,7 +14,6 @@ export const ManageEvents = () => {
 
   // Event Stats States
   const [selectedEventType, setSelectedEventType] = useState(EVENT_PROP_VALUES.DROP_IN);
-  const [selectedAge, setSelectedAge] = useState(EVENT_PROP_VALUES.CHILD);
   const [averageCount, setAverageCount] = useState<number>();
   const [minCount, setMinCount] = useState<number>();
   const [maxCount, setMaxCount] = useState<number>();
@@ -25,12 +24,8 @@ export const ManageEvents = () => {
   const [adultSignUpCount, setAdultSignUpCount] = useState<number>();
   const [accountsWithAllSignedUp, setAccountsWithAllSignedUp] = useState([]);
 
-  const handleClick = (value: string, field?: string) => {
-    if (field === 'type') {
-      setSelectedEventType(value);
-    } else {
-      setSelectedAge(value);
-    }
+  const handleClick = (value: string) => {
+    setSelectedEventType(value);
   };
 
   const handleFetchStats = async () => {
@@ -40,7 +35,6 @@ export const ManageEvents = () => {
         method: 'get',
         url: '/event/stats',
         params: {
-          age: selectedAge,
           type: selectedEventType
         },
         headers: { 'Content-Type': null, cache: false }
@@ -127,7 +121,7 @@ export const ManageEvents = () => {
 
   useEffect(() => {
     handleFetchStats();
-  }, [selectedEventType, selectedAge]);
+  }, [selectedEventType]);
 
   useEffect(() => {
     handleFetchClientStats();
@@ -140,13 +134,8 @@ export const ManageEvents = () => {
         <div className="col-span-2">
           <h2 className="text-left text-4xl font-bold mb-4">Event Statistics</h2>
           <div className="mb-4 flex gap-4">
-            <SelectButton color="bg-dark-blue" selected={selectedEventType === EVENT_PROP_VALUES.DROP_IN} name={"Drop-in"} onClick={()=>handleClick(EVENT_PROP_VALUES.DROP_IN, 'type')} />
-            <SelectButton color="bg-dark-blue" selected={selectedEventType === EVENT_PROP_VALUES.PROGRAM} name={"Program"} onClick={()=>handleClick(EVENT_PROP_VALUES.PROGRAM, 'type')} />
-          </div>
-          <div className="mb-4 flex gap-4">
-            <SelectButton color="bg-dark-blue" selected={selectedAge === EVENT_PROP_VALUES.CHILD} name={"Child"} onClick={()=>handleClick(EVENT_PROP_VALUES.CHILD)}/>
-            <SelectButton color="bg-dark-blue" selected={selectedAge === EVENT_PROP_VALUES.YOUTH} name={"Youth"} onClick={()=>handleClick(EVENT_PROP_VALUES.YOUTH)}/>
-            <SelectButton color="bg-dark-blue" selected={selectedAge === EVENT_PROP_VALUES.ADULT} name={"Adult"} onClick={()=>handleClick(EVENT_PROP_VALUES.ADULT)}/>
+            <SelectButton color="bg-dark-blue" selected={selectedEventType === EVENT_PROP_VALUES.DROP_IN} name={"Drop-in"} onClick={()=>handleClick(EVENT_PROP_VALUES.DROP_IN)} />
+            <SelectButton color="bg-dark-blue" selected={selectedEventType === EVENT_PROP_VALUES.PROGRAM} name={"Program"} onClick={()=>handleClick(EVENT_PROP_VALUES.PROGRAM)} />
           </div>
           <div className="bg-light-blue py-4 px-6 rounded-2xl mb-8">
             <div className="text-left flex"><p className="grow"><strong>Average</strong> Sign-up Count</p> {averageCount || 0}</div>
@@ -193,13 +182,13 @@ export const ManageEvents = () => {
         </div>
       </div>
       <div>
-          <Toast
-            successMessage={successMessage}
-            setSuccessMessage={setSuccessMessage}
-            errorMessage={errorMessage}
-            setErrorMessage={setErrorMessage}
-          />
-        </div>
+        <Toast
+          successMessage={successMessage}
+          setSuccessMessage={setSuccessMessage}
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+        />
+      </div>
     </div>
   );
 };

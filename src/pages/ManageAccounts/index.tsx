@@ -99,9 +99,9 @@ export const ManageAccounts = () => {
                   <div className="flex mb-8">
                     <h3 className='text-3xl text-left font-bold grow'>Edit User</h3>
                     <Button name="Cancel" color="bg-white" onClick={() => setIsOpen(false)}/>
-                    <Button minWidth="w-6" name="Post" onClick={handleSubmit}/>
+                    <Button minWidth="w-6" name="Update" onClick={handleSubmit}/>
                   </div>
-                  <div className=" bg-white justify-self-center grid grid-cols-4 gap-2">
+                  <div className=" bg-white justify-self-center grid grid-cols-4 gap-4">
                     <InputText label='First Name' width="col-span-2" value={input.first_name} onChange={(e) => handleChange(e, 'first_name')}/>
                     <InputText label ='Last Name' width="col-span-2" value={input.last_name} onChange={(e) => handleChange(e, 'last_name')} />
                     <InputText label='Username' width={accountTypeSelected.toLowerCase() === ACCOUNT_TYPES.CLIENT ? "col-span-3" : "col-span-4"} value={input.username} onChange={(e) => handleChange(e, 'username')} disabled />
@@ -110,7 +110,7 @@ export const ManageAccounts = () => {
                     ): (
                       <Select label='Role' value={input.role} options={[EMPLOYEE_ROLES.INSTRUCTOR, EMPLOYEE_ROLES.RECEPTIONIST, EMPLOYEE_ROLES.MANAGER]} width="col-span-4" onChange={(e: any) => handleChange(e, 'role')}/>
                     )}
-                    <Select label='User Type' value={input.account_type} options={[ACCOUNT_TYPES.CLIENT, ACCOUNT_TYPES.EMPLOYEE]} width="col-span-4" onChange={() => {}} disabled/>
+                    <Select label='User Type' value={input.account_type} options={[ACCOUNT_TYPES.CLIENT, ACCOUNT_TYPES.EMPLOYEE]} width="col-span-4" onChange={() => ''} disabled/>
                   </div>
                 </div>
               </ReactModal>
