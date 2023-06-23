@@ -9,6 +9,7 @@ export const useSignUp = () => {
   const [accountType, setAccountType] = useState(ACCOUNT_TYPES.CLIENT);
   const [employeeRole, setEmployeeRole] = useState(EMPLOYEE_ROLES.INSTRUCTOR);
   const [error, setError] = useState(false);
+  const [ageError, setAgeError] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
     const newInput = { ...input };
@@ -25,6 +26,10 @@ export const useSignUp = () => {
   };
 
   const handleSubmit = async () => {
+    if (isNaN(Number(input.age))) {
+      setAgeError(true);
+      return;
+    }
     try {
       const res = await axios({
         baseURL: API_BASE_URL,
@@ -46,6 +51,7 @@ export const useSignUp = () => {
     hookUserType: accountType,
     hookInputs: input,
     hookError: error,
+    hookAgeError: ageError,
 
     hookHandleSelect: handleSelect,
     hookHandleRoleSelect: handleRoleSelect,

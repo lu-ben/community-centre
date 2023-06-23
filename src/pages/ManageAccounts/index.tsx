@@ -61,6 +61,10 @@ export const ManageAccounts = () => {
   };
 
   const handleSubmit = async () => {
+    if (isNaN(input.age)) {
+      setErrorMessage('Invalid Age! Please try again');
+      return;
+    }
     try {
       const res = await axios({
         baseURL: API_BASE_URL,

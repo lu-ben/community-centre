@@ -15,6 +15,7 @@ export const SignUp = () => {
       <p className="text-6xl font-bold text-white">User sign-up</p>
       <div className=" bg-white py-8 px-10 mt-8 rounded-2xl justify-self-center w-80 grid grid-cols-4 gap-2">
         <div className="col-span-4">{hook.hookError && <ErrorText message="Signup failed. Please try again"/>}</div>
+        <div className="col-span-4">{hook.hookAgeError && <ErrorText message="Invalid Age! Please try again"/>}</div>
         <InputText label='First Name' width="col-span-2" value={hook.hookInputs.firstName} onChange={(e) => hook.hookHandleChange(e, 'firstName')}/>
         <InputText label ='Last Name' width="col-span-2" value={hook.hookInputs.lastName} onChange={(e) => hook.hookHandleChange(e, 'lastName')} />
         <InputText label='Username' width={hook.hookUserType === ACCOUNT_TYPES.CLIENT ? "col-span-3" : "col-span-4"} value={hook.hookInputs.username} onChange={(e) => hook.hookHandleChange(e, 'username')} />
