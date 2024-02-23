@@ -1,4 +1,4 @@
-# CPSC 304 Community Center Project
+# Community Center Website
 
 ![image](https://github.com/lu-ben/community-centre/assets/97806653/a5ae3a3e-c9da-4131-85df-71792a71feb7)
 
